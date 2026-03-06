@@ -75,7 +75,16 @@
                 <p><strong>推荐理由：</strong>嗟夫刀减伤，八方枪控制，团队前排</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="破竹·风 💨" name="4">
+            <el-collapse-item title="裂石·钧 🔨" name="4">
+              <div class="config-item">
+                <p><strong>武器：</strong>十方破阵 + 斩雪刀法</p>
+                <p><strong>定位：</strong>横刀/首领增伤</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率</p>
+                <p><strong>毕业面板：</strong>外攻 1700-3300，精准 98%+，会心 70%+</p>
+                <p><strong>推荐理由：</strong>克制巨型 BOSS，横刀与首领增伤</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="破竹·风 💨" name="5">
               <div class="config-item">
                 <p><strong>武器：</strong>泥犁三垢 + 粟子游尘</p>
                 <p><strong>定位：</strong>近战高机动刺客</p>
@@ -84,22 +93,40 @@
                 <p><strong>推荐理由：</strong>毒伤 + 灵动位移，专攻敌方弱点</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="破竹·鸢 🦅" name="5">
+            <el-collapse-item title="破竹·鸢 🦅" name="6">
               <div class="config-item">
                 <p><strong>武器：</strong>天志垂象 + 千机锁天</p>
                 <p><strong>定位：</strong>全能型控制/输出</p>
-                <p><strong>核心属性：</strong>会心率/会意率 > 外功攻击 > 精准率</p>
-                <p><strong>毕业面板：</strong>会心 50%+，会意 40%+，外攻尽可能高</p>
+                <p><strong>核心属性：</strong>会心率 > 外功攻击 > 精准率</p>
+                <p><strong>毕业面板：</strong>外攻 1800-3300，精准 98%+，会心 75%+</p>
                 <p><strong>推荐理由：</strong>霸体硬刚 + 远程拉扯，战场适应性极强</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="牵丝·霖 🌧️" name="6">
+            <el-collapse-item title="破竹·尘 🌸" name="7">
+              <div class="config-item">
+                <p><strong>武器：</strong>醉梦游春 + 粟子行云</p>
+                <p><strong>定位：</strong>伞/首领增伤</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率</p>
+                <p><strong>毕业面板：</strong>外攻 1700-3300，精准 98%+，会心 70%+</p>
+                <p><strong>推荐理由：</strong>控制辅助，伞与首领增伤</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="牵丝·霖 🌧️" name="8">
               <div class="config-item">
                 <p><strong>武器：</strong>明川药典 + 千香引魂蛊</p>
                 <p><strong>定位：</strong>纯治疗辅助</p>
                 <p><strong>核心属性：</strong>鸣金攻击 > 会心率 > 牵丝攻击</p>
                 <p><strong>毕业面板：</strong>外攻 1700-3400，会心 75%+，牵丝 850+</p>
                 <p><strong>推荐理由：</strong>群体治疗 + 净化，团队生存保障</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="牵丝·玉 🎨" name="9">
+              <div class="config-item">
+                <p><strong>武器：</strong>九重春色 + 青山执笔</p>
+                <p><strong>定位：</strong>散武学增伤</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率</p>
+                <p><strong>毕业面板：</strong>外攻 1700-3300，精准 98%+，会心 70%+</p>
+                <p><strong>推荐理由：</strong>输出辅助，散武学增伤</p>
               </div>
             </el-collapse-item>
           </el-collapse>

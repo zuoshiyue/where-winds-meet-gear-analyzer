@@ -253,36 +253,39 @@ function getDefaultWeights(flowName) {
     precision: 1.0,
   }
   
-  // 官方六大流派权重
-  
-  // 鸣金·虹 - 中远程均衡输出
+  // 鸣金流派
   if (flowName === '鸣金·虹') {
     return { ...defaultWeights, attack: 1.8, precision: 1.6, crit: 1.5, crit_damage: 1.5 }
   }
-  
-  // 鸣金·影 - 近战流血爆发
   if (flowName === '鸣金·影') {
     return { ...defaultWeights, attack: 1.8, precision: 1.7, crit: 1.6, crit_damage: 1.5 }
   }
   
-  // 裂石·威 - 坦克/近战输出
+  // 裂石流派
   if (flowName === '裂石·威') {
     return { ...defaultWeights, attack: 1.4, precision: 1.8, crit: 1.7, defense: 1.5, health: 1.4 }
   }
+  if (flowName === '裂石·钧') {
+    return { ...defaultWeights, attack: 1.7, precision: 1.8, crit: 1.9, element_damage: 1.6 }
+  }
   
-  // 破竹·风 - 近战高机动刺客
+  // 破竹流派
   if (flowName === '破竹·风') {
     return { ...defaultWeights, attack: 1.7, precision: 1.8, crit: 1.9, speed: 1.8 }
   }
-  
-  // 破竹·鸢 - 全能型控制/输出
   if (flowName === '破竹·鸢') {
-    return { ...defaultWeights, crit: 2.0, crit_damage: 2.0, attack: 1.8, precision: 1.5 }
+    return { ...defaultWeights, crit: 2.0, crit_damage: 2.0, attack: 1.8, precision: 1.8 }
+  }
+  if (flowName === '破竹·尘') {
+    return { ...defaultWeights, attack: 1.7, precision: 1.8, crit: 1.9, element_damage: 1.6 }
   }
   
-  // 牵丝·霖 - 纯治疗辅助
+  // 牵丝流派
   if (flowName === '牵丝·霖') {
     return { ...defaultWeights, crit: 2.0, element_damage: 1.8, attack: 1.5, health: 1.2 }
+  }
+  if (flowName === '牵丝·玉') {
+    return { ...defaultWeights, attack: 1.7, precision: 1.8, crit: 1.9, element_damage: 1.8 }
   }
   
   return defaultWeights
