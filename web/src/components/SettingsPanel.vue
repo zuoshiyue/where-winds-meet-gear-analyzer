@@ -42,52 +42,73 @@
         <span class="tip">此操作不可恢复，请谨慎操作</span>
       </el-form-item>
 
-      <!-- 职业配置 -->
+      <!-- 流派配置 -->
       <el-divider />
 
-      <el-form-item label="职业配置">
+      <el-form-item label="流派配置">
         <div class="class-configs">
           <el-collapse>
-            <el-collapse-item title="⚔️ 剑客" name="1">
+            <el-collapse-item title="⚔️ 九剑·输出" name="1">
               <div class="config-item">
-                <p><strong>定位：</strong>近战输出，攻守兼备，高机动性</p>
+                <p><strong>定位：</strong>九剑输出，攻守兼备，高机动性</p>
                 <p><strong>核心属性：</strong>攻击 > 暴击 ≈ 爆伤 > 速度</p>
                 <p><strong>推荐套装：</strong>剑心套装、疾风套装、暴击套装</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🔪 刀客" name="2">
+            <el-collapse-item title="🔪 唐横刀·狂战" name="2">
               <div class="config-item">
-                <p><strong>定位：</strong>近战高攻击，快速击倒敌人</p>
+                <p><strong>定位：</strong>唐横刀狂战，极致输出，快速击倒</p>
                 <p><strong>核心属性：</strong>攻击 > 爆伤 > 暴击</p>
                 <p><strong>推荐套装：</strong>霸刀套装、铁血套装、强攻套装</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🛡️ 枪客" name="3">
+            <el-collapse-item title="🗡️ 双刀·刺客" name="3">
               <div class="config-item">
-                <p><strong>定位：</strong>长柄武器，坦克型，扛伤输出兼具</p>
-                <p><strong>核心属性：</strong>防御 ≈ 生命 > 攻击</p>
-                <p><strong>推荐套装：</strong>长枪套装、防御套装、坦克套装</p>
+                <p><strong>定位：</strong>双刀刺客，高风险高回报，一击必杀</p>
+                <p><strong>核心属性：</strong>暴击 ≈ 爆伤 > 速度 > 攻击</p>
+                <p><strong>推荐套装：</strong>暗影套装、潜行套装、暴击套装</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="💚 医仙" name="4">
+            <el-collapse-item title="🛡️ 九枪·坦克" name="4">
               <div class="config-item">
-                <p><strong>定位：</strong>辅助治疗，团队核心</p>
+                <p><strong>定位：</strong>九枪坦克，扛伤输出兼具</p>
+                <p><strong>核心属性：</strong>防御 ≈ 生命 > 攻击</p>
+                <p><strong>推荐套装：</strong>防御套装、坦克套装、生命套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="🛡️ 裂石钧·防御" name="5">
+              <div class="config-item">
+                <p><strong>定位：</strong>裂石钧防御，以守为攻，反弹伤害</p>
+                <p><strong>核心属性：</strong>防御 > 生命 > 攻击</p>
+                <p><strong>推荐套装：</strong>玄钧套装、防御套装、反震套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="💚 医仙·治疗" name="6">
+              <div class="config-item">
+                <p><strong>定位：</strong>医仙治疗，团队核心，救死扶伤</p>
                 <p><strong>核心属性：</strong>生命 > 防御 > 暴击</p>
                 <p><strong>推荐套装：</strong>治疗套装、辅助套装、生命套装</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="👊 拳师" name="5">
+            <el-collapse-item title="🎵 伞扇·辅助" name="7">
               <div class="config-item">
-                <p><strong>定位：</strong>近战格斗，高频率攻击</p>
-                <p><strong>核心属性：</strong>速度 > 攻击 > 暴击</p>
-                <p><strong>推荐套装：</strong>拳法套装、格斗套装、近身套装</p>
+                <p><strong>定位：</strong>伞扇辅助，控制增益，团队支援</p>
+                <p><strong>核心属性：</strong>生命 > 元素 > 防御</p>
+                <p><strong>推荐套装：</strong>音律套装、辅助套装、控制套装</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🗡️ 刺客" name="6">
+            <el-collapse-item title="👊 无名·基础" name="8">
               <div class="config-item">
-                <p><strong>定位：</strong>高风险高回报，一击必杀</p>
-                <p><strong>核心属性：</strong>暴击 ≈ 爆伤 > 速度 > 攻击</p>
-                <p><strong>推荐套装：</strong>暗影套装、潜行套装、暴击套装</p>
+                <p><strong>定位：</strong>无名基础，平衡发展，新手推荐</p>
+                <p><strong>核心属性：</strong>全属性平衡</p>
+                <p><strong>推荐套装：</strong>无名套装、通用套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="🔮 嗟夫·特殊" name="9">
+              <div class="config-item">
+                <p><strong>定位：</strong>嗟夫特殊，独特机制，灵活多变</p>
+                <p><strong>核心属性：</strong>暴击 > 爆伤 > 元素</p>
+                <p><strong>推荐套装：</strong>嗟夫套装、特殊套装</p>
               </div>
             </el-collapse-item>
           </el-collapse>
