@@ -9,6 +9,20 @@
           <p class="subtitle">燕云十六声装备分析工具</p>
         </div>
       </div>
+      
+      <!-- 下载工具按钮 -->
+      <div class="download-tool">
+        <el-button
+          type="warning"
+          size="large"
+          @click="openDownloadPage"
+          class="download-btn"
+        >
+          <el-icon><Download /></el-icon>
+          下载自动截图工具
+        </el-button>
+        <p class="tool-tip">一键下载 PC 端自动截图脚本 · 热键 F9 快速捕获</p>
+      </div>
     </header>
 
     <!-- 主内容区 -->
@@ -82,6 +96,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
+import { Download } from '@element-plus/icons-vue'
 import ImageUploader from './components/ImageUploader.vue'
 import EquipmentList from './components/EquipmentList.vue'
 import AnalysisPanel from './components/AnalysisPanel.vue'
@@ -130,6 +145,21 @@ const handleDelete = async (id) => {
   await deleteEquipment(id)
   ElMessage.success('删除成功')
 }
+
+// 打开下载页面
+const openDownloadPage = () => {
+  // 方式 1：打开下载页面组件（如果有路由）
+  // window.open('/download', '_blank')
+  
+  // 方式 2：直接下载 ZIP 文件
+  // const downloadUrl = '/tools/燕云装备助手 - 自动截图工具-v1.0.zip'
+  // window.open(downloadUrl, '_blank')
+  
+  // 方式 3：打开 GitHub releases
+  window.open('https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/tree/main/tools', '_blank')
+  
+  ElMessage.info('📦 正在打开工具下载页面...')
+}
 </script>
 
 <style scoped>
@@ -175,6 +205,37 @@ const handleDelete = async (id) => {
   margin: 10px 0 0;
   font-size: 1.1em;
   opacity: 0.9;
+}
+
+.download-tool {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  display: inline-block;
+}
+
+.download-btn {
+  height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+  transition: all 0.3s;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+}
+
+.tool-tip {
+  margin: 10px 0 0;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
 }
 
 .main-content {

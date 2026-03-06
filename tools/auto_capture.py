@@ -254,8 +254,6 @@ class AutoCapture:
         print(f"📁 截图目录：{self.output_dir.absolute()}")
         print(f"⌨️ 热键：{self.config['capture_hotkey']}")
         print(f"⏱️ 定时模式：{'开启' if self.config['timer_mode'] else '关闭'}")
-        if self.config["timer_mode"]:
-            print(f"   间隔：{self.config['timer_interval']}秒")
         print(f"🌐 自动上传：{'开启' if self.config['auto_upload'] else '关闭'}")
         print("=" * 50)
         print("\n💡 使用说明:")
