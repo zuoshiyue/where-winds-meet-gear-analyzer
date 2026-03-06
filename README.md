@@ -12,15 +12,16 @@
 
 ## ✨ 特性
 
-### Web 版 (推荐)
+### Web 版 (当前版本)
 - 🚀 **纯前端应用** - 无需安装，打开浏览器即用
 - 📸 **截图上传** - 支持批量上传游戏截图
 - 🔍 **OCR 识别** - 浏览器端文字识别，保护隐私
 - 📊 **智能评分** - 基于职业和套装的装备评分系统
-- 💾 **本地存储** - IndexedDB 存储，数据不离开浏览器
+- 💾 **本地存储** - IndexedDB 存储，数据完全本地化
 - 🎨 **响应式设计** - 支持桌面和移动端
+- 🔒 **独立运行** - 无需后端服务器，无需第三方服务
 
-### Python 版 (参考实现)
+### Python 版 (历史版本/参考实现)
 - 桌面应用版本 (PyQt6)
 - 代码作为参考保留在 `/src` 目录
 
@@ -28,22 +29,27 @@
 
 ## 🛠️ 技术栈
 
-### 后端
-- **语言：** Python 3.10+
-- **OCR 引擎：** PaddleOCR (中文识别优化)
-- **图像处理：** OpenCV, Pillow
-- **截图库：** mss, PyAutoGUI
-- **数据库：** SQLite + SQLAlchemy
-- **数据分析：** pandas, numpy
+### Web 版
+| 类别 | 技术 |
+|------|------|
+| 框架 | Vue.js 3 |
+| 构建工具 | Vite 5 |
+| UI 组件库 | Element Plus |
+| OCR | Tesseract.js |
+| 本地存储 | localforage (IndexedDB) |
+| 图表 | ECharts |
+| 部署 | GitHub Pages |
 
-### 前端 (可选)
-- **框架：** Electron + React 或 PyQt6
-- **UI 库：** Ant Design 或 PyQt 原生组件
-- **图表：** ECharts / Chart.js
-
-### 集成
-- **飞书 API：** Bitable 数据同步
-- **GitHub：** 代码托管、Issue 追踪
+### Python 版 (参考)
+| 类别 | 技术 |
+|------|------|
+| 语言 | Python 3.10+ |
+| OCR 引擎 | PaddleOCR |
+| 图像处理 | OpenCV, Pillow |
+| 截图库 | mss, PyAutoGUI |
+| 数据库 | SQLite + SQLAlchemy |
+| 数据分析 | pandas, numpy |
+| UI | PyQt6 |
 
 ---
 
@@ -52,163 +58,139 @@
 ```
 where-winds-meet-gear-analyzer/
 ├── README.md
-├── requirements.txt
-├── config.yaml                 # 配置文件
-├── main.py                     # 主入口
-├── src/
-│   ├── __init__.py
-│   ├── screenshot/            # 截图模块
-│   │   ├── __init__.py
-│   │   ├── capture.py         # 截图功能
-│   │   └── region.py          # 区域识别
-│   ├── ocr/                   # OCR 模块
-│   │   ├── __init__.py
-│   │   ├── recognizer.py      # OCR 识别
-│   │   ├── parser.py          # 数据解析
-│   │   └── preprocessor.py    # 图像预处理
-│   ├── database/              # 数据库模块
-│   │   ├── __init__.py
-│   │   ├── models.py          # 数据模型
-│   │   ├── repository.py      # 数据操作
-│   │   └── feishu_sync.py     # 飞书同步
-│   ├── analyzer/              # 分析模块
-│   │   ├── __init__.py
-│   │   ├── scorer.py          # 评分系统
-│   │   ├── classifier.py      # 职业分类
-│   │   └── recommender.py     # 培养建议
-│   └── ui/                    # 界面模块
-│       ├── __init__.py
-│       ├── main_window.py     # 主窗口
-│       └── components/        # UI 组件
-├── data/
-│   ├── screenshots/           # 截图存储
-│   ├── database/              # 数据库文件
-│   └── config/                # 用户配置
-├── docs/
-│   ├── 开发文档.md
-│   ├── API 文档.md
-│   └── 使用指南.md
-└── tests/                     # 测试用例
-    ├── test_ocr.py
-    ├── test_analyzer.py
-    └── test_database.py
+├── web/                        # Web 版源码 (当前版本)
+│   ├── src/
+│   │   ├── components/         # Vue 组件
+│   │   ├── composables/        # Composable 函数
+│   │   ├── utils/              # 工具函数
+│   │   ├── App.vue             # 主组件
+│   │   └── main.js             # 入口文件
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
+├── src/                        # Python 版源码 (参考)
+│   ├── screenshot/             # 截图模块
+│   ├── ocr/                    # OCR 模块
+│   ├── database/               # 数据库模块
+│   ├── analyzer/               # 分析模块
+│   └── ui/                     # 界面模块
+├── docs/                       # 文档
+├── .github/
+│   └── workflows/
+│       └── deploy-web.yml      # GitHub Actions 部署
+└── data/                       # 数据目录
+    ├── screenshots/
+    └── database/
 ```
 
 ---
 
-## 📊 数据模型
+## 🚀 快速开始
 
-### 装备表 (Equipment)
-```sql
-- id: INTEGER PRIMARY KEY
-- name: TEXT                  # 装备名称
-- type: TEXT                  # 装备类型 (武器/防具/饰品)
-- quality: INTEGER            # 品质 (1-5)
-- level: INTEGER              # 强化等级
-- set_name: TEXT              # 套装名称
-- stats: JSON                 # 属性列表
-- screenshot_path: TEXT       # 截图路径
-- created_at: DATETIME
-- updated_at: DATETIME
-```
+### 在线使用 (推荐)
 
-### 职业配置表 (ClassConfig)
-```sql
-- id: INTEGER PRIMARY KEY
-- class_name: TEXT            # 职业名称
-- preferred_sets: JSON        # 推荐套装
-- stat_weights: JSON          # 属性权重
-- notes: TEXT                 # 备注
-```
+直接访问：https://zuoshiyue.github.io/where-winds-meet-gear-analyzer/
 
-### 评分记录表 (ScoreRecord)
-```sql
-- id: INTEGER PRIMARY KEY
-- equipment_id: INTEGER       # 装备 ID
-- class_name: TEXT            # 职业名称
-- total_score: FLOAT          # 总分
-- sub_scores: JSON            # 分项评分
-- recommendation: TEXT        # 培养建议
-- created_at: DATETIME
+### 本地开发
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/zuoshiyue/where-winds-meet-gear-analyzer.git
+cd where-winds-meet-gear-analyzer/web
+
+# 2. 安装依赖
+npm install
+
+# 3. 启动开发服务器
+npm run dev
+
+# 4. 访问应用
+# 打开浏览器：http://localhost:5173/
 ```
 
 ---
 
-## 🎨 UI 设计要点
+## 📖 功能说明
 
-### 主界面布局
-```
-┌─────────────────────────────────────┐
-│  工具栏 [截图] [分析] [导出] [设置]   │
-├─────────────┬───────────────────────┤
-│             │                       │
-│  筛选面板   │      装备列表          │
-│  - 职业     │   (表格/卡片视图)      │
-│  - 品质     │                       │
-│  - 类型     │                       │
-│  - 套装     │                       │
-│             │                       │
-├─────────────┴───────────────────────┤
-│  状态栏 [装备数：123] [最后更新：...] │
-└─────────────────────────────────────┘
-```
+### 1. 截图上传
+- 拖拽上传
+- 批量上传
+- 实时预览
 
-### 装备详情页
-- 装备大图展示
-- 属性列表 (高亮核心属性)
-- 评分雷达图
-- 培养建议文本
-- 对比功能入口
+### 2. OCR 识别
+- Tesseract.js 中文识别
+- 图像预处理 (去噪、增强对比度)
+- 装备数据自动解析
 
----
+### 3. 装备管理
+- 装备列表展示
+- 筛选 (品质、类型、套装)
+- 排序 (评分、等级、品质)
+- 删除装备
 
-## 📈 开发里程碑
+### 4. 评分系统
+- 职业配置 (通用/输出/坦克)
+- 属性权重自定义
+- 评分详情展示
+- 培养建议生成
 
-### Phase 1 - 核心功能 (2 周)
-- [x] 项目初始化
-- [ ] 截图功能实现
-- [ ] OCR 识别基础功能
-- [ ] 数据库模型设计
-- [ ] 基础 UI 框架
+### 5. 数据统计
+- 装备数量统计
+- 品质分布图表
+- 类型分布图表
+- 平均评分趋势
 
-### Phase 2 - 数据分析 (2 周)
-- [ ] 装备属性解析完善
-- [ ] 评分系统实现
-- [ ] 职业配置系统
-- [ ] 飞书集成
-
-### Phase 3 - 优化完善 (1 周)
-- [ ] UI 优化
-- [ ] 性能优化
-- [ ] 测试用例
-- [ ] 文档完善
-
-### Phase 4 - 扩展功能 (可选)
-- [ ] 自动批量截图
-- [ ] 装备交易价值评估
-- [ ] 社区分享功能
-- [ ] 多游戏支持
+### 6. 数据管理
+- 导出 JSON/CSV
+- 导入备份数据
+- 清空所有数据
 
 ---
 
 ## ⚠️ 注意事项
 
-1. **游戏合规性：** 仅用于个人数据分析，不涉及游戏修改
-2. **OCR 准确性：** 需要大量样本训练优化
-3. **性能优化：** 截图和 OCR 较耗资源，需优化
-4. **数据安全：** 本地存储优先，云端同步可选
+1. **浏览器兼容性** - 需要支持 IndexedDB 的现代浏览器 (Chrome 90+ / Edge 90+)
+2. **OCR 准确性** - 受截图质量影响，建议上传清晰的游戏截图
+3. **数据备份** - 定期导出 JSON 备份，清除浏览器缓存会丢失数据
+4. **隐私安全** - 所有数据处理在本地完成，不会上传到任何服务器
 
 ---
 
-## 📚 参考资料
+## 📝 开发指南
 
-- [原神胡桃工具箱](https://github.com/DGP-Studio/Hutao) - 参考 UI 和评分系统
-- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) - 中文 OCR 引擎
-- [PyAutoGUI](https://pyautogui.readthedocs.io/) - 自动化控制
-- [飞书开放平台](https://open.feishu.cn/) - 数据同步 API
+### 添加新功能
+
+```bash
+# 1. 创建新组件
+# web/src/components/NewFeature.vue
+
+# 2. 在 App.vue 中引入
+# 3. 运行开发服务器测试
+npm run dev
+```
+
+### 修改评分逻辑
+
+编辑 `web/src/utils/scorer.js`，修改 `calculateScore` 函数。
+
+### 添加新职业
+
+在 `web/src/utils/scorer.js` 的 `CLASS_CONFIGS` 中添加新配置。
 
 ---
 
-**创建日期：** 2026-03-06  
-**版本：** v1.0  
-**状态：** 开发中
+## 🔗 相关链接
+
+- **GitHub:** https://github.com/zuoshiyue/where-winds-meet-gear-analyzer
+- **在线应用:** https://zuoshiyue.github.io/where-winds-meet-gear-analyzer/
+- **Issue 追踪:** https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/issues
+
+---
+
+## 📄 许可证
+
+MIT License
+
+---
+
+**开发中...** 🚧
