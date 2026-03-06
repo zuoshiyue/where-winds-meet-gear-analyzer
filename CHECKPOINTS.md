@@ -115,6 +115,7 @@
 
 ## 🔗 相关链接
 
-- **GitHub 仓库：** https://github.com/zuoshiyue/where-winds-meet-gear-analyzer
+- **GitHub 仓库：** https://github.com/zuoshiyue/where-winds-meet-gear-analyzer ✅
 - **需求文档：** README.md
 - **开发文档：** docs/开发文档.md
+- **会话标识：** #燕云装备助手-dev (用于会话中断后恢复)
