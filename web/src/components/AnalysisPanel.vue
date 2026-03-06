@@ -2,11 +2,18 @@
   <div class="analysis-panel">
     <!-- 职业选择 -->
     <div class="class-selector">
-      <el-radio-group v-model="selectedClass" @change="handleClassChange">
-        <el-radio-button label="通用" />
-        <el-radio-button label="输出" />
-        <el-radio-button label="坦克" />
-      </el-radio-group>
+      <el-select v-model="selectedClass" placeholder="选择职业" style="width: 200px" @change="handleClassChange">
+        <el-option label="通用" value="通用" />
+        <el-option label="⚔️ 剑客" value="剑客" />
+        <el-option label="🔪 刀客" value="刀客" />
+        <el-option label="🛡️ 枪客" value="枪客" />
+        <el-option label="💚 医仙" value="医仙" />
+        <el-option label="👊 拳师" value="拳师" />
+        <el-option label="🗡️ 刺客" value="刺客" />
+      </el-select>
+      <div class="class-description" v-if="getClassDescription(selectedClass)">
+        <el-tag type="info" size="small">{{ getClassDescription(selectedClass) }}</el-tag>
+      </div>
     </div>
 
     <!-- 装备列表 -->
@@ -119,6 +126,20 @@ const getScoreType = (score) => {
   if (score >= 100) return ''
   return 'danger'
 }
+
+// 获取职业描述
+const getClassDescription = (className) => {
+  const descriptions = {
+    '通用': '通用配置，适合所有职业',
+    '剑客': '近战输出，攻守兼备，高机动性',
+    '刀客': '近战高攻击，快速击倒敌人',
+    '枪客': '长柄武器，坦克型，扛伤输出兼具',
+    '医仙': '辅助治疗，团队核心',
+    '拳师': '近战格斗，高频率攻击',
+    '刺客': '高风险高回报，一击必杀',
+  }
+  return descriptions[className] || ''
+}
 </script>
 
 <style scoped>
@@ -129,6 +150,14 @@ const getScoreType = (score) => {
 .class-selector {
   margin-bottom: 20px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.class-description {
+  min-width: 200px;
 }
 
 .recommendation {

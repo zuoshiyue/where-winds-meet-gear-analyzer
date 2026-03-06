@@ -42,6 +42,58 @@
         <span class="tip">此操作不可恢复，请谨慎操作</span>
       </el-form-item>
 
+      <!-- 职业配置 -->
+      <el-divider />
+
+      <el-form-item label="职业配置">
+        <div class="class-configs">
+          <el-collapse>
+            <el-collapse-item title="⚔️ 剑客" name="1">
+              <div class="config-item">
+                <p><strong>定位：</strong>近战输出，攻守兼备，高机动性</p>
+                <p><strong>核心属性：</strong>攻击 > 暴击 ≈ 爆伤 > 速度</p>
+                <p><strong>推荐套装：</strong>剑心套装、疾风套装、暴击套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="🔪 刀客" name="2">
+              <div class="config-item">
+                <p><strong>定位：</strong>近战高攻击，快速击倒敌人</p>
+                <p><strong>核心属性：</strong>攻击 > 爆伤 > 暴击</p>
+                <p><strong>推荐套装：</strong>霸刀套装、铁血套装、强攻套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="🛡️ 枪客" name="3">
+              <div class="config-item">
+                <p><strong>定位：</strong>长柄武器，坦克型，扛伤输出兼具</p>
+                <p><strong>核心属性：</strong>防御 ≈ 生命 > 攻击</p>
+                <p><strong>推荐套装：</strong>长枪套装、防御套装、坦克套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="💚 医仙" name="4">
+              <div class="config-item">
+                <p><strong>定位：</strong>辅助治疗，团队核心</p>
+                <p><strong>核心属性：</strong>生命 > 防御 > 暴击</p>
+                <p><strong>推荐套装：</strong>治疗套装、辅助套装、生命套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="👊 拳师" name="5">
+              <div class="config-item">
+                <p><strong>定位：</strong>近战格斗，高频率攻击</p>
+                <p><strong>核心属性：</strong>速度 > 攻击 > 暴击</p>
+                <p><strong>推荐套装：</strong>拳法套装、格斗套装、近身套装</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="🗡️ 刺客" name="6">
+              <div class="config-item">
+                <p><strong>定位：</strong>高风险高回报，一击必杀</p>
+                <p><strong>核心属性：</strong>暴击 ≈ 爆伤 > 速度 > 攻击</p>
+                <p><strong>推荐套装：</strong>暗影套装、潜行套装、暴击套装</p>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+      </el-form-item>
+
       <!-- 关于 -->
       <el-divider />
 
@@ -169,5 +221,25 @@ async function handleClear() {
   margin-left: 10px;
   font-size: 12px;
   color: #999;
+}
+
+.class-configs {
+  width: 100%;
+}
+
+.config-item {
+  padding: 10px;
+  background: #f5f7fa;
+  border-radius: 4px;
+}
+
+.config-item p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #606266;
+}
+
+.config-item strong {
+  color: #303133;
 }
 </style>

@@ -23,33 +23,90 @@ const DEFAULT_STAT_WEIGHTS = {
   speed: 1.0,
 }
 
-// 职业配置
+// 职业配置 (根据燕云十六声实际职业)
 const CLASS_CONFIGS = {
   '通用': {
     preferred_sets: [],
     stat_weights: DEFAULT_STAT_WEIGHTS,
+    description: '通用配置，适合所有职业',
   },
-  '输出': {
-    preferred_sets: ['输出套装', '暴击套装'],
+  '剑客': {
+    preferred_sets: ['剑心套装', '疾风套装', '暴击套装'],
     stat_weights: {
-      attack: 1.2,
-      defense: 0.5,
-      health: 0.5,
-      crit: 1.8,
-      crit_damage: 1.8,
-      element_damage: 1.5,
+      attack: 1.5,      // 高优先级 - 主要输出属性
+      defense: 1.0,     // 中等优先级 - 攻守兼备
+      health: 0.8,      // 中等优先级 - 生存能力
+      crit: 1.8,        // 高优先级 - 暴击输出
+      crit_damage: 1.8, // 高优先级 - 爆伤加成
+      element_damage: 1.3, // 中等优先级 - 元素伤害
+      speed: 1.5,       // 高优先级 - 攻速移速
     },
+    description: '近战输出，攻守兼备，高机动性',
   },
-  '坦克': {
-    preferred_sets: ['防御套装', '生命套装'],
+  '刀客': {
+    preferred_sets: ['霸刀套装', '铁血套装', '强攻套装'],
     stat_weights: {
-      attack: 0.5,
-      defense: 1.8,
-      health: 1.8,
-      crit: 1.0,
-      crit_damage: 1.0,
-      element_damage: 0.8,
+      attack: 1.8,      // 最高优先级 - 极致输出
+      defense: 0.6,     // 低优先级 - 牺牲防御
+      health: 0.6,      // 低优先级 - 牺牲生存
+      crit: 1.6,        // 高优先级 - 暴击加成
+      crit_damage: 1.9, // 最高优先级 - 爆伤最大化
+      element_damage: 1.4, // 中等优先级
+      speed: 1.2,       // 中等优先级
     },
+    description: '近战高攻击，快速击倒敌人',
+  },
+  '枪客': {
+    preferred_sets: ['长枪套装', '防御套装', '坦克套装'],
+    stat_weights: {
+      attack: 0.8,      // 低优先级 - 次要输出
+      defense: 1.8,     // 最高优先级 - 主坦克属性
+      health: 1.8,      // 最高优先级 - 生存能力
+      crit: 1.0,        // 低优先级
+      crit_damage: 1.0, // 低优先级
+      element_damage: 1.0, // 低优先级
+      speed: 0.8,       // 低优先级
+    },
+    description: '长柄武器，坦克型，扛伤输出兼具',
+  },
+  '医仙': {
+    preferred_sets: ['治疗套装', '辅助套装', '生命套装'],
+    stat_weights: {
+      attack: 0.5,      // 最低优先级 - 几乎不需要
+      defense: 1.2,     // 中等优先级 - 自保能力
+      health: 1.8,      // 最高优先级 - 生存和治療量
+      crit: 1.3,        // 中等优先级 - 治疗暴击
+      crit_damage: 1.0, // 低优先级
+      element_damage: 0.8, // 低优先级
+      speed: 1.0,       // 中等优先级 - 施法速度
+    },
+    description: '辅助治疗，团队核心',
+  },
+  '拳师': {
+    preferred_sets: ['拳法套装', '格斗套装', '近身套装'],
+    stat_weights: {
+      attack: 1.6,      // 高优先级 - 主要输出
+      defense: 1.2,     // 中等优先级 - 近身需要
+      health: 1.0,      // 中等优先级
+      crit: 1.5,        // 高优先级
+      crit_damage: 1.6, // 高优先级
+      element_damage: 1.2, // 中等优先级
+      speed: 1.8,       // 最高优先级 - 攻速至关重要
+    },
+    description: '近战格斗，高频率攻击',
+  },
+  '刺客': {
+    preferred_sets: ['暗影套装', '潜行套装', '暴击套装'],
+    stat_weights: {
+      attack: 1.4,      // 高优先级
+      defense: 0.5,     // 低优先级 - 玻璃大炮
+      health: 0.5,      // 低优先级 - 高风险高回报
+      crit: 2.0,        // 最高优先级 - 核心属性
+      crit_damage: 2.0, // 最高优先级 - 一击必杀
+      element_damage: 1.5, // 高优先级
+      speed: 1.6,       // 高优先级 - 机动性
+    },
+    description: '高风险高回报，一击必杀',
   },
 }
 
