@@ -253,39 +253,36 @@ function getDefaultWeights(flowName) {
     precision: 1.0,
   }
   
-  // T0 梯队 - 极致输出
+  // 官方六大流派权重
+  
+  // 鸣金·虹 - 中远程均衡输出
+  if (flowName === '鸣金·虹') {
+    return { ...defaultWeights, attack: 1.8, precision: 1.6, crit: 1.5, crit_damage: 1.5 }
+  }
+  
+  // 鸣金·影 - 近战流血爆发
+  if (flowName === '鸣金·影') {
+    return { ...defaultWeights, attack: 1.8, precision: 1.7, crit: 1.6, crit_damage: 1.5 }
+  }
+  
+  // 裂石·威 - 坦克/近战输出
+  if (flowName === '裂石·威') {
+    return { ...defaultWeights, attack: 1.4, precision: 1.8, crit: 1.7, defense: 1.5, health: 1.4 }
+  }
+  
+  // 破竹·风 - 近战高机动刺客
+  if (flowName === '破竹·风') {
+    return { ...defaultWeights, attack: 1.7, precision: 1.8, crit: 1.9, speed: 1.8 }
+  }
+  
+  // 破竹·鸢 - 全能型控制/输出
   if (flowName === '破竹·鸢') {
-    return { ...defaultWeights, attack: 1.8, crit: 2.0, crit_damage: 2.0, speed: 1.8 }
-  }
-  if (flowName === '牵丝·玉') {
-    return { ...defaultWeights, attack: 1.6, crit: 1.8, crit_damage: 1.8, precision: 1.5 }
+    return { ...defaultWeights, crit: 2.0, crit_damage: 2.0, attack: 1.8, precision: 1.5 }
   }
   
-  // T0.5 梯队 - 高端流派
-  if (flowName.includes('破竹·风')) {
-    return { ...defaultWeights, attack: 1.7, crit: 1.9, crit_damage: 1.9, speed: 1.9 }
-  }
-  if (flowName.includes('破竹·尘')) {
-    return { ...defaultWeights, attack: 1.4, crit: 1.6, crit_damage: 1.6, element_damage: 1.5 }
-  }
-  if (flowName.includes('鸣金·影')) {
-    return { ...defaultWeights, attack: 1.7, crit: 1.9, crit_damage: 1.9 }
-  }
-  
-  // T1 梯队 - 实用流派
-  if (flowName.includes('鸣金·虹')) {
-    return { ...defaultWeights, attack: 1.5, crit: 1.7, crit_damage: 1.7 }
-  }
-  if (flowName.includes('裂石')) {
-    return { ...defaultWeights, defense: 1.7, health: 1.4, attack: 1.3 }
-  }
-  if (flowName.includes('奇门')) {
-    return { ...defaultWeights, element_damage: 1.8, crit: 1.5, crit_damage: 1.5 }
-  }
-  
-  // T2 梯队 - 特殊流派
-  if (flowName.includes('游龙')) {
-    return { ...defaultWeights, speed: 2.0, crit: 1.7, crit_damage: 1.7 }
+  // 牵丝·霖 - 纯治疗辅助
+  if (flowName === '牵丝·霖') {
+    return { ...defaultWeights, crit: 2.0, element_damage: 1.8, attack: 1.5, health: 1.2 }
   }
   
   return defaultWeights

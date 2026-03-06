@@ -48,84 +48,58 @@
       <el-form-item label="流派配置">
         <div class="class-configs">
           <el-collapse>
-            <el-collapse-item title="T0 破竹·鸢 ⚔️" name="1">
+            <el-collapse-item title="鸣金·虹 🔱" name="1">
               <div class="config-item">
-                <p><strong>武器：</strong>剑 + 扇</p>
-                <p><strong>定位：</strong>极致爆发/无敌帧</p>
-                <p><strong>核心属性：</strong>攻击 > 暴击 ≈ 爆伤 > 速度</p>
-                <p><strong>推荐理由：</strong>当前版本秒伤天花板，操作上限极高，竞速本必备</p>
+                <p><strong>武器：</strong>无名剑法 + 无名枪法</p>
+                <p><strong>定位：</strong>中远程均衡输出</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率/会意率</p>
+                <p><strong>毕业面板：</strong>外攻 3800+，精准 95%+，会心 38%+，会意 39%+</p>
+                <p><strong>推荐理由：</strong>攻守兼备的万金油选择，剑气与枪芒交织</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="T0 牵丝·玉 🏹" name="2">
+            <el-collapse-item title="鸣金·影 ⚔️" name="2">
               <div class="config-item">
-                <p><strong>武器：</strong>弓 + 伞</p>
-                <p><strong>定位：</strong>远程风筝/团队增益</p>
-                <p><strong>核心属性：</strong>攻击 > 暴击 > 精准</p>
-                <p><strong>推荐理由：</strong>单刷最安全，组队最抢手，容错率与输出并存</p>
+                <p><strong>武器：</strong>积矩九剑 + 九曲惊神枪</p>
+                <p><strong>定位：</strong>近战流血爆发</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率/会意率</p>
+                <p><strong>毕业面板：</strong>外攻 3800+，精准 97%+，会心 45%+，会意 37%+</p>
+                <p><strong>推荐理由：</strong>九剑叠加流血，枪引爆爆发，节奏感极强</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="T0.5 破竹·风 ⚔️" name="3">
+            <el-collapse-item title="裂石·威 🛡️" name="3">
               <div class="config-item">
-                <p><strong>武器：</strong>剑 + 刀</p>
-                <p><strong>定位：</strong>高频吸血/持续压制</p>
-                <p><strong>核心属性：</strong>攻击 > 暴击 > 速度</p>
-                <p><strong>推荐理由：</strong>生存能力优秀的输出流，低延迟下表现超越 T0</p>
+                <p><strong>武器：</strong>嗟夫刀法 + 八方风雷枪</p>
+                <p><strong>定位：</strong>坦克/近战输出</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率</p>
+                <p><strong>毕业面板：</strong>外攻 1600-3300，精准 98%+，会心 56%+</p>
+                <p><strong>推荐理由：</strong>嗟夫刀减伤，八方枪控制，团队前排</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="T0.5 破竹·尘 🎵" name="4">
+            <el-collapse-item title="破竹·风 💨" name="4">
               <div class="config-item">
-                <p><strong>武器：</strong>剑 + 笛</p>
-                <p><strong>定位：</strong>强力控制/团队辅助</p>
-                <p><strong>核心属性：</strong>攻击 > 元素 > 控制</p>
-                <p><strong>推荐理由：</strong>高难副本必备辅助，能极大降低全队承伤压力</p>
+                <p><strong>武器：</strong>泥犁三垢 + 粟子游尘</p>
+                <p><strong>定位：</strong>近战高机动刺客</p>
+                <p><strong>核心属性：</strong>外功攻击 > 精准率 > 会心率</p>
+                <p><strong>毕业面板：</strong>外攻 1700-3400，精准 98%+，会心 65%+</p>
+                <p><strong>推荐理由：</strong>毒伤 + 灵动位移，专攻敌方弱点</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="T0.5 鸣金·影 🔱" name="5">
+            <el-collapse-item title="破竹·鸢 🦅" name="5">
               <div class="config-item">
-                <p><strong>武器：</strong>枪 + 剑</p>
-                <p><strong>定位：</strong>流血爆发/近战缠斗</p>
-                <p><strong>核心属性：</strong>攻击 > 暴击 > 爆伤</p>
-                <p><strong>推荐理由：</strong>喜欢近战操作感和高爆发数字的玩家首选</p>
+                <p><strong>武器：</strong>天志垂象 + 千机锁天</p>
+                <p><strong>定位：</strong>全能型控制/输出</p>
+                <p><strong>核心属性：</strong>会心率/会意率 > 外功攻击 > 精准率</p>
+                <p><strong>毕业面板：</strong>会心 50%+，会意 40%+，外攻尽可能高</p>
+                <p><strong>推荐理由：</strong>霸体硬刚 + 远程拉扯，战场适应性极强</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="T1 鸣金·虹 🏹" name="6">
+            <el-collapse-item title="牵丝·霖 🌧️" name="6">
               <div class="config-item">
-                <p><strong>武器：</strong>枪 + 弓</p>
-                <p><strong>定位：</strong>中距离拉扯/新手友好</p>
-                <p><strong>核心属性：</strong>攻击 > 暴击 > 平衡</p>
-                <p><strong>推荐理由：</strong>新手入坑首选，开荒体验极佳，几乎无短板</p>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="T1 裂石·威 🛡️" name="7">
-              <div class="config-item">
-                <p><strong>武器：</strong>重剑 + 盾</p>
-                <p><strong>定位：</strong>绝对防御/反击输出</p>
-                <p><strong>核心属性：</strong>防御 > 生命 > 攻击</p>
-                <p><strong>推荐理由：</strong>独狼玩家福音，面对高攻 BOSS 时生存率最高</p>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="T1 裂石·钧 🔨" name="8">
-              <div class="config-item">
-                <p><strong>武器：</strong>重剑 + 锤</p>
-                <p><strong>定位：</strong>超级破韧/眩晕控制</p>
-                <p><strong>核心属性：</strong>防御 > 破韧 > 生命</p>
-                <p><strong>推荐理由：</strong>适合对付霸体多、韧性高的巨型 BOSS</p>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="T1 奇门·幻 🎭" name="9">
-              <div class="config-item">
-                <p><strong>武器：</strong>扇 + 笛</p>
-                <p><strong>定位：</strong>诡异身法/异常状态</p>
-                <p><strong>核心属性：</strong>元素 > 暴击 > 速度</p>
-                <p><strong>推荐理由：</strong>PVP 强势，PVE 中适合处理特定机制怪</p>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="T2 游龙·水 💧" name="10">
-              <div class="config-item">
-                <p><strong>武器：</strong>刀 + 扇</p>
-                <p><strong>定位：</strong>高机动/闪避反击</p>
-                <p><strong>核心属性：</strong>速度 > 暴击 > 攻击</p>
-                <p><strong>推荐理由：</strong>适合高手秀操作，普通玩家容易空大</p>
+                <p><strong>武器：</strong>明川药典 + 千香引魂蛊</p>
+                <p><strong>定位：</strong>纯治疗辅助</p>
+                <p><strong>核心属性：</strong>鸣金攻击 > 会心率 > 牵丝攻击</p>
+                <p><strong>毕业面板：</strong>外攻 1700-3400，会心 75%+，牵丝 850+</p>
+                <p><strong>推荐理由：</strong>群体治疗 + 净化，团队生存保障</p>
               </div>
             </el-collapse-item>
           </el-collapse>
