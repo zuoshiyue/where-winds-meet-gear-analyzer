@@ -44,6 +44,12 @@
           <el-descriptions-item label="强化分">{{ scoreData.level_score.toFixed(1) }}</el-descriptions-item>
           <el-descriptions-item label="套装加成">{{ scoreData.set_bonus.toFixed(1) }}</el-descriptions-item>
         </el-descriptions>
+        
+        <div class="view-detail-btn">
+          <el-button type="primary" @click="$emit('view-detail', equipment)">
+            📊 查看详细评分计算过程
+          </el-button>
+        </div>
       </div>
 
       <!-- 培养建议 -->
@@ -136,5 +142,10 @@ h4 {
   color: #333;
   font-size: 14px;
   font-weight: 600;
+}
+
+.view-detail-btn {
+  margin-top: 15px;
+  text-align: center;
 }
 </style>

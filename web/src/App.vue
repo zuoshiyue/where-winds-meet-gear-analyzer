@@ -49,6 +49,16 @@
       :equipment="selectedEquipment"
       :visible="showDetail"
       @close="showDetail = false"
+      @view-detail="handleViewScoreDetail"
+    />
+
+    <!-- 评分详情面板 -->
+    <ScoreDetailPanel
+      v-if="selectedEquipment"
+      :equipment="selectedEquipment"
+      :visible="showScoreDetail"
+      :class-name="selectedClass"
+      @close="showScoreDetail = false"
     />
 
     <!-- 底部 -->
@@ -73,11 +83,14 @@ import AnalysisPanel from './components/AnalysisPanel.vue'
 import StatsChart from './components/StatsChart.vue'
 import SettingsPanel from './components/SettingsPanel.vue'
 import EquipmentDetail from './components/EquipmentDetail.vue'
+import ScoreDetailPanel from './components/ScoreDetailPanel.vue'
 import { useEquipment } from './composables/useEquipment'
 
 const activeTab = ref('upload')
 const showDetail = ref(false)
+const showScoreDetail = ref(false)
 const selectedEquipment = ref(null)
+const selectedClass = ref('通用')
 
 const { equipmentList, loadEquipment, addEquipment, deleteEquipment } = useEquipment()
 
@@ -99,6 +112,12 @@ const handleUploadComplete = async (equipments) => {
 const handleViewDetail = (equipment) => {
   selectedEquipment.value = equipment
   showDetail.value = true
+}
+
+// 查看详细评分
+const handleViewScoreDetail = (equipment) => {
+  selectedEquipment.value = equipment
+  showScoreDetail.value = true
 }
 
 // 删除装备
