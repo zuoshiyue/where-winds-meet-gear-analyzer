@@ -1,7 +1,31 @@
 <template>
   <div class="analysis-panel">
-    <!-- 流派选择 -->
-    <div class="class-selector">
+    <!-- 模式切换 -->
+    <div class="mode-switcher">
+      <el-radio-group v-model="analysisMode" size="large">
+        <el-radio-button label="complete">📊 完整分析</el-radio-button>
+        <el-radio-button label="embryo">🌱 胚子评估</el-radio-button>
+      </el-radio-group>
+    </div>
+
+    <!-- 胚子评估模式 -->
+    <div v-if="analysisMode === 'embryo'" class="embryo-mode">
+      <EmbryoEvaluator
+        :embryo-data="selectedEmbryo"
+        @start-tracking="handleStartTracking"
+      />
+      <DieyinTracker
+        v-if="isTracking"
+        :embryo-data="selectedEmbryo"
+        :flow="selectedClass"
+        class="tracker-wrapper"
+      />
+    </div>
+
+    <!-- 完整分析模式 -->
+    <div v-else class="complete-mode">
+      <!-- 流派选择 -->
+      <div class="class-selector">
       <el-select v-model="selectedClass" placeholder="选择武器心法流派" style="width: 250px" @change="handleClassChange">
         <el-option-group
           v-for="group in flowGroups"
@@ -88,6 +112,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { bulkScore, getFlowCategories } from '../utils/scorer'
+import EmbryoEvaluator from './EmbryoEvaluator.vue'
+import DieyinTracker from './DieyinTracker.vue'
 
 const props = defineProps({
   equipmentList: {
@@ -97,6 +123,11 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['view-detail'])
+
+// 分析模式
+const analysisMode = ref('complete') // 'complete' | 'embryo'
+const isTracking = ref(false)
+const selectedEmbryo = ref(null)
 
 const selectedClass = ref('通用')
 const selectedEquipment = ref(null)
@@ -160,11 +191,35 @@ const getFlowDescription = (flowName) => {
   }
   return descriptions[flowName] || ''
 }
+
+// 胚子评估相关方法
+const handleStartTracking = (embryoData) => {
+  selectedEmbryo.value = embryoData
+  isTracking.value = true
+}
 </script>
 
 <style scoped>
 .analysis-panel {
   padding: 20px;
+}
+
+.mode-switcher {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.embryo-mode {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tracker-wrapper {
+  margin-top: 20px;
+}
+
+.complete-mode {
+  // 原有完整分析模式的样式
 }
 
 .class-selector {
