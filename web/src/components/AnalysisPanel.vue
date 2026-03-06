@@ -1,18 +1,23 @@
 <template>
   <div class="analysis-panel">
-    <!-- 职业选择 -->
+    <!-- 流派选择 -->
     <div class="class-selector">
-      <el-select v-model="selectedClass" placeholder="选择职业" style="width: 200px" @change="handleClassChange">
-        <el-option label="通用" value="通用" />
-        <el-option label="⚔️ 剑客" value="剑客" />
-        <el-option label="🔪 刀客" value="刀客" />
-        <el-option label="🛡️ 枪客" value="枪客" />
-        <el-option label="💚 医仙" value="医仙" />
-        <el-option label="👊 拳师" value="拳师" />
-        <el-option label="🗡️ 刺客" value="刺客" />
+      <el-select v-model="selectedClass" placeholder="选择武器心法流派" style="width: 250px" @change="handleClassChange">
+        <el-option-group
+          v-for="group in flowGroups"
+          :key="group.label"
+          :label="group.label"
+        >
+          <el-option
+            v-for="flow in group.flows"
+            :key="flow.value"
+            :label="flow.label"
+            :value="flow.value"
+          />
+        </el-option-group>
       </el-select>
-      <div class="class-description" v-if="getClassDescription(selectedClass)">
-        <el-tag type="info" size="small">{{ getClassDescription(selectedClass) }}</el-tag>
+      <div class="class-description" v-if="getFlowDescription(selectedClass)">
+        <el-tag type="info" size="small">{{ getFlowDescription(selectedClass) }}</el-tag>
       </div>
     </div>
 
@@ -82,7 +87,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { bulkScore } from '../utils/scorer'
+import { bulkScore, getFlowCategories } from '../utils/scorer'
 
 const props = defineProps({
   equipmentList: {
@@ -96,6 +101,18 @@ const emit = defineEmits(['view-detail'])
 const selectedClass = ref('通用')
 const selectedEquipment = ref(null)
 
+// 流派分组
+const flowGroups = computed(() => {
+  const categories = getFlowCategories()
+  return Object.entries(categories).map(([label, flows]) => ({
+    label,
+    flows: flows.map(flow => ({
+      label: flow,
+      value: flow,
+    }))
+  }))
+})
+
 // 批量评分
 const scoredEquipment = computed(() => {
   return bulkScore(props.equipmentList, selectedClass.value)
@@ -108,7 +125,7 @@ const sortedEquipment = computed(() => {
   )
 })
 
-// 处理职业切换
+// 处理流派切换
 const handleClassChange = () => {
   selectedEquipment.value = null
 }
@@ -127,18 +144,22 @@ const getScoreType = (score) => {
   return 'danger'
 }
 
-// 获取职业描述
-const getClassDescription = (className) => {
+// 获取流派描述
+const getFlowDescription = (flowName) => {
   const descriptions = {
-    '通用': '通用配置，适合所有职业',
-    '剑客': '近战输出，攻守兼备，高机动性',
-    '刀客': '近战高攻击，快速击倒敌人',
-    '枪客': '长柄武器，坦克型，扛伤输出兼具',
-    '医仙': '辅助治疗，团队核心',
-    '拳师': '近战格斗，高频率攻击',
-    '刺客': '高风险高回报，一击必杀',
+    '通用': '通用配置，适合所有流派',
+    '剑法·输出': '剑法输出，攻守兼备，高机动性',
+    '枪法·输出': '枪法输出，长柄范围，高爆发',
+    '双刃·刺客': '双刃刺客，高风险高回报，一击必杀',
+    '刀法·狂战': '刀法狂战，极致输出，快速击倒',
+    '枪法·坦克': '枪法坦克，扛伤输出兼具',
+    '伞法·防御': '伞法防御，以守为攻，反弹伤害',
+    '医仙·治疗': '医仙治疗，团队核心，救死扶伤',
+    '琴法·辅助': '琴法辅助，控制增益，团队支援',
+    '拳法·格斗': '拳法格斗，高频率攻击，连招快感',
+    '暗器·远程': '暗器远程，灵活走位，持续输出',
   }
-  return descriptions[className] || ''
+  return descriptions[flowName] || ''
 }
 </script>
 

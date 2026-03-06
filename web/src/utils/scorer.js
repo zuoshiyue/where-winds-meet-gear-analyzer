@@ -1,6 +1,9 @@
 /**
  * 装备评分模块
- * 根据职业配置计算装备评分
+ * 根据燕云十六声武器心法流派计算装备评分
+ * 
+ * 燕云十六声是武器心法决定的流派制度，非固定职业
+ * 参考：https://wwm-db.com/zh/
  */
 
 // 品质基础分
@@ -14,110 +17,183 @@ const QUALITY_SCORES = {
 
 // 默认属性权重
 const DEFAULT_STAT_WEIGHTS = {
-  attack: 1.0,
-  defense: 0.8,
-  health: 0.7,
-  crit: 1.5,
-  crit_damage: 1.5,
-  element_damage: 1.3,
-  speed: 1.0,
+  attack: 1.0,        // 攻击
+  defense: 0.8,       // 防御
+  health: 0.7,        // 生命
+  crit: 1.5,          // 暴击
+  crit_damage: 1.5,   // 爆伤
+  element_damage: 1.3, // 元素伤害
+  speed: 1.0,         // 速度/攻速
 }
 
-// 职业配置 (根据燕云十六声实际职业)
-const CLASS_CONFIGS = {
+/**
+ * 武器/心法流派配置
+ * 
+ * 燕云十六声采用自由流派系统，由武器和心法决定玩法
+ * 目前已知的武器类型：剑、枪、双刃、刀、伞等 12 种
+ * 
+ * 参考：https://wwm-db.com/zh/weapons/
+ */
+const FLOW_CONFIGS = {
   '通用': {
     preferred_sets: [],
     stat_weights: DEFAULT_STAT_WEIGHTS,
-    description: '通用配置，适合所有职业',
+    description: '通用配置，适合所有流派',
   },
-  '剑客': {
+  
+  // ===== 输出流派 =====
+  '剑法·输出': {
     preferred_sets: ['剑心套装', '疾风套装', '暴击套装'],
     stat_weights: {
-      attack: 1.5,      // 高优先级 - 主要输出属性
-      defense: 1.0,     // 中等优先级 - 攻守兼备
-      health: 0.8,      // 中等优先级 - 生存能力
-      crit: 1.8,        // 高优先级 - 暴击输出
-      crit_damage: 1.8, // 高优先级 - 爆伤加成
-      element_damage: 1.3, // 中等优先级 - 元素伤害
-      speed: 1.5,       // 高优先级 - 攻速移速
+      attack: 1.5,
+      defense: 1.0,
+      health: 0.8,
+      crit: 1.8,
+      crit_damage: 1.8,
+      element_damage: 1.3,
+      speed: 1.5,
     },
-    description: '近战输出，攻守兼备，高机动性',
+    description: '剑法输出，攻守兼备，高机动性',
   },
-  '刀客': {
-    preferred_sets: ['霸刀套装', '铁血套装', '强攻套装'],
+  
+  '枪法·输出': {
+    preferred_sets: ['长枪套装', '破军套装', '暴击套装'],
     stat_weights: {
-      attack: 1.8,      // 最高优先级 - 极致输出
-      defense: 0.6,     // 低优先级 - 牺牲防御
-      health: 0.6,      // 低优先级 - 牺牲生存
-      crit: 1.6,        // 高优先级 - 暴击加成
-      crit_damage: 1.9, // 最高优先级 - 爆伤最大化
-      element_damage: 1.4, // 中等优先级
-      speed: 1.2,       // 中等优先级
+      attack: 1.6,
+      defense: 0.8,
+      health: 0.7,
+      crit: 1.7,
+      crit_damage: 1.9,
+      element_damage: 1.4,
+      speed: 1.3,
     },
-    description: '近战高攻击，快速击倒敌人',
+    description: '枪法输出，长柄范围，高爆发',
   },
-  '枪客': {
-    preferred_sets: ['长枪套装', '防御套装', '坦克套装'],
-    stat_weights: {
-      attack: 0.8,      // 低优先级 - 次要输出
-      defense: 1.8,     // 最高优先级 - 主坦克属性
-      health: 1.8,      // 最高优先级 - 生存能力
-      crit: 1.0,        // 低优先级
-      crit_damage: 1.0, // 低优先级
-      element_damage: 1.0, // 低优先级
-      speed: 0.8,       // 低优先级
-    },
-    description: '长柄武器，坦克型，扛伤输出兼具',
-  },
-  '医仙': {
-    preferred_sets: ['治疗套装', '辅助套装', '生命套装'],
-    stat_weights: {
-      attack: 0.5,      // 最低优先级 - 几乎不需要
-      defense: 1.2,     // 中等优先级 - 自保能力
-      health: 1.8,      // 最高优先级 - 生存和治療量
-      crit: 1.3,        // 中等优先级 - 治疗暴击
-      crit_damage: 1.0, // 低优先级
-      element_damage: 0.8, // 低优先级
-      speed: 1.0,       // 中等优先级 - 施法速度
-    },
-    description: '辅助治疗，团队核心',
-  },
-  '拳师': {
-    preferred_sets: ['拳法套装', '格斗套装', '近身套装'],
-    stat_weights: {
-      attack: 1.6,      // 高优先级 - 主要输出
-      defense: 1.2,     // 中等优先级 - 近身需要
-      health: 1.0,      // 中等优先级
-      crit: 1.5,        // 高优先级
-      crit_damage: 1.6, // 高优先级
-      element_damage: 1.2, // 中等优先级
-      speed: 1.8,       // 最高优先级 - 攻速至关重要
-    },
-    description: '近战格斗，高频率攻击',
-  },
-  '刺客': {
+  
+  '双刃·刺客': {
     preferred_sets: ['暗影套装', '潜行套装', '暴击套装'],
     stat_weights: {
-      attack: 1.4,      // 高优先级
-      defense: 0.5,     // 低优先级 - 玻璃大炮
-      health: 0.5,      // 低优先级 - 高风险高回报
-      crit: 2.0,        // 最高优先级 - 核心属性
-      crit_damage: 2.0, // 最高优先级 - 一击必杀
-      element_damage: 1.5, // 高优先级
-      speed: 1.6,       // 高优先级 - 机动性
+      attack: 1.4,
+      defense: 0.5,
+      health: 0.5,
+      crit: 2.0,
+      crit_damage: 2.0,
+      element_damage: 1.5,
+      speed: 1.6,
     },
-    description: '高风险高回报，一击必杀',
+    description: '双刃刺客，高风险高回报，一击必杀',
+  },
+  
+  '刀法·狂战': {
+    preferred_sets: ['霸刀套装', '铁血套装', '强攻套装'],
+    stat_weights: {
+      attack: 1.8,
+      defense: 0.6,
+      health: 0.6,
+      crit: 1.6,
+      crit_damage: 1.9,
+      element_damage: 1.4,
+      speed: 1.2,
+    },
+    description: '刀法狂战，极致输出，快速击倒',
+  },
+  
+  // ===== 坦克流派 =====
+  '枪法·坦克': {
+    preferred_sets: ['防御套装', '坦克套装', '生命套装'],
+    stat_weights: {
+      attack: 0.8,
+      defense: 1.8,
+      health: 1.8,
+      crit: 1.0,
+      crit_damage: 1.0,
+      element_damage: 1.0,
+      speed: 0.8,
+    },
+    description: '枪法坦克，扛伤输出兼具',
+  },
+  
+  '伞法·防御': {
+    preferred_sets: ['玄伞套装', '防御套装', '反震套装'],
+    stat_weights: {
+      attack: 0.9,
+      defense: 1.7,
+      health: 1.5,
+      crit: 1.2,
+      crit_damage: 1.2,
+      element_damage: 1.1,
+      speed: 1.0,
+    },
+    description: '伞法防御，以守为攻，反弹伤害',
+  },
+  
+  // ===== 辅助流派 =====
+  '医仙·治疗': {
+    preferred_sets: ['治疗套装', '辅助套装', '生命套装'],
+    stat_weights: {
+      attack: 0.5,
+      defense: 1.2,
+      health: 1.8,
+      crit: 1.3,
+      crit_damage: 1.0,
+      element_damage: 0.8,
+      speed: 1.0,
+    },
+    description: '医仙治疗，团队核心，救死扶伤',
+  },
+  
+  '琴法·辅助': {
+    preferred_sets: ['音律套装', '辅助套装', '控制套装'],
+    stat_weights: {
+      attack: 0.8,
+      defense: 1.0,
+      health: 1.5,
+      crit: 1.2,
+      crit_damage: 1.0,
+      element_damage: 1.3,
+      speed: 1.2,
+    },
+    description: '琴法辅助，控制增益，团队支援',
+  },
+  
+  // ===== 特殊流派 =====
+  '拳法·格斗': {
+    preferred_sets: ['拳法套装', '格斗套装', '近身套装'],
+    stat_weights: {
+      attack: 1.6,
+      defense: 1.2,
+      health: 1.0,
+      crit: 1.5,
+      crit_damage: 1.6,
+      element_damage: 1.2,
+      speed: 1.8,
+    },
+    description: '拳法格斗，高频率攻击，连招快感',
+  },
+  
+  '暗器·远程': {
+    preferred_sets: ['暗器套装', '远程套装', '精准套装'],
+    stat_weights: {
+      attack: 1.5,
+      defense: 0.7,
+      health: 0.7,
+      crit: 1.8,
+      crit_damage: 1.7,
+      element_damage: 1.4,
+      speed: 1.4,
+    },
+    description: '暗器远程，灵活走位，持续输出',
   },
 }
 
 /**
  * 计算装备评分
  * @param {Object} equipment - 装备对象
- * @param {string} className - 职业名称
+ * @param {string} flowName - 流派名称
  * @returns {Object} 评分结果
  */
-export function calculateScore(equipment, className = '通用') {
-  const config = CLASS_CONFIGS[className] || CLASS_CONFIGS['通用']
+export function calculateScore(equipment, flowName = '通用') {
+  const config = FLOW_CONFIGS[flowName] || FLOW_CONFIGS['通用']
   const weights = config.stat_weights
 
   // 1. 品质分
@@ -151,7 +227,7 @@ export function calculateScore(equipment, className = '通用') {
     level_score,
     set_bonus,
     recommendation,
-    class_name: className,
+    flow_name: flowName,
   }
 }
 
@@ -213,15 +289,15 @@ function generateRecommendation(equipment, totalScore, config) {
     suggestions.push('套装契合度高，推荐作为毕业装备')
   }
 
-  return suggestions.join('；')
+  return suggestions.join(';')
 }
 
 /**
  * 对比两件装备
  */
-export function compareEquipment(eq1, eq2, className = '通用') {
-  const score1 = calculateScore(eq1, className)
-  const score2 = calculateScore(eq2, className)
+export function compareEquipment(eq1, eq2, flowName = '通用') {
+  const score1 = calculateScore(eq1, flowName)
+  const score2 = calculateScore(eq2, flowName)
 
   const diff = score1.total_score - score2.total_score
 
@@ -244,9 +320,32 @@ export function compareEquipment(eq1, eq2, className = '通用') {
 /**
  * 批量评分
  */
-export function bulkScore(equipmentList, className = '通用') {
+export function bulkScore(equipmentList, flowName = '通用') {
   return equipmentList.map(eq => ({
     ...eq,
-    scoreData: calculateScore(eq, className),
+    scoreData: calculateScore(eq, flowName),
   }))
+}
+
+/**
+ * 获取所有可用流派
+ */
+export function getAvailableFlows() {
+  return Object.keys(FLOW_CONFIGS).map(key => ({
+    key,
+    ...FLOW_CONFIGS[key],
+  }))
+}
+
+/**
+ * 获取流派分类
+ */
+export function getFlowCategories() {
+  return {
+    '输出流派': ['剑法·输出', '枪法·输出', '双刃·刺客', '刀法·狂战'],
+    '坦克流派': ['枪法·坦克', '伞法·防御'],
+    '辅助流派': ['医仙·治疗', '琴法·辅助'],
+    '特殊流派': ['拳法·格斗', '暗器·远程'],
+    '其他': ['通用'],
+  }
 }
