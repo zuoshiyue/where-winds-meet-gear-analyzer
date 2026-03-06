@@ -5,6 +5,7 @@
  * 参考项目:
  * - 燕云伤害模拟器：https://kaph404.github.io/Yanyun-calculator/
  * - 燕云十六声攻略站：https://yy16s.github.io/
+ * - 玩家社区整理：《燕云十六声》全主流流派双武配置总表 (2026.03 版)
  * 
  * 核心属性:
  * - 会心率 (暴击率) - 基准伤害 150%
@@ -13,11 +14,17 @@
  * - 会意伤害 - 默认 135%
  * - 精准率
  * 
- * 流派分类 (玩家通用):
- * - 鸣金 (无名、九九)
- * - 裂石 (姐夫、刀法)
- * - 牵丝 (玉玉、霖霖)
- * - 破竹 (风尘、尘尘)
+ * 流派分类 (玩家通用 - 2026.03 版):
+ * - 破竹·鸢 (剑 + 扇) - T0 极致爆发
+ * - 牵丝·玉 (弓 + 伞) - T0 远程风筝
+ * - 破竹·风 (剑 + 刀) - T0.5 高频吸血
+ * - 破竹·尘 (剑 + 笛) - T0.5 强力控制
+ * - 鸣金·影 (枪 + 剑) - T0.5 流血爆发
+ * - 鸣金·虹 (枪 + 弓) - T1 中距离拉扯
+ * - 裂石·威 (重剑 + 盾) - T1 绝对防御
+ * - 裂石·钧 (重剑 + 锤) - T1 超级破韧
+ * - 奇门·幻 (扇 + 笛) - T1 诡异身法
+ * - 游龙·水 (刀 + 扇) - T2 高机动
  */
 
 // 品质基础分
@@ -45,12 +52,7 @@ const DEFAULT_STAT_WEIGHTS = {
  * 武器/心法流派配置
  * 
  * 燕云十六声采用自由流派系统，由武器和心法决定玩法
- * 参考玩家通用命名和 wwm-db.com 数据，以及伤害计算器项目
- * 
- * 玩家通用命名:
- * - 无名 (基础)、九剑 (剑)、九枪 (枪)、双刀 (双刃)
- * - 唐横刀 (刀)、裂石钧 (坦克)、伞扇 (伞)
- * - 嗟夫 (特殊武器) 等
+ * 根据玩家社区整理的《全主流流派双武配置总表》(2026.03 版)
  * 
  * 参考：https://kaph404.github.io/Yanyun-calculator/
  */
@@ -61,158 +63,158 @@ const FLOW_CONFIGS = {
     description: '通用配置，适合所有流派',
   },
   
-  // ===== 输出流派 =====
-  '九剑·输出': {
-    preferred_sets: ['剑心套装', '疾风套装', '暴击套装'],
+  // ===== T0 梯队 =====
+  '破竹·鸢': {
+    preferred_sets: ['爆发套装', '疾风套装', '剑气套装'],
     stat_weights: {
-      attack: 1.5,
-      defense: 1.0,
-      health: 0.8,
-      crit: 1.8,        // 会心率 - 核心属性
-      crit_damage: 1.8, // 会心伤害 - 核心属性
-      element_damage: 1.3,
-      speed: 1.5,
-      precision: 1.2,   // 精准率
-    },
-    description: '九剑输出，攻守兼备，高机动性',
-  },
-  
-  '九枪·输出': {
-    preferred_sets: ['长枪套装', '破军套装', '暴击套装'],
-    stat_weights: {
-      attack: 1.6,
-      defense: 0.8,
-      health: 0.7,
-      crit: 1.7,
-      crit_damage: 1.9,
-      element_damage: 1.4,
-      speed: 1.3,
-      precision: 1.2,
-    },
-    description: '九枪输出，长柄范围，高爆发',
-  },
-  
-  '双刀·刺客': {
-    preferred_sets: ['暗影套装', '潜行套装', '暴击套装'],
-    stat_weights: {
-      attack: 1.4,
-      defense: 0.5,
-      health: 0.5,
-      crit: 2.0,        // 会心率 - 极致堆叠
-      crit_damage: 2.0, // 会心伤害 - 极致堆叠
-      element_damage: 1.5,
-      speed: 1.6,
-      precision: 1.5,   // 精准率 - 确保命中
-    },
-    description: '双刀刺客，高风险高回报，一击必杀',
-  },
-  
-  '唐横刀·狂战': {
-    preferred_sets: ['霸刀套装', '铁血套装', '强攻套装'],
-    stat_weights: {
-      attack: 1.8,
+      attack: 1.8,        // 极致攻击
       defense: 0.6,
       health: 0.6,
-      crit: 1.6,
-      crit_damage: 1.9,
-      element_damage: 1.4,
-      speed: 1.2,
+      crit: 2.0,          // 会心率 - 核心属性
+      crit_damage: 2.0,   // 会心伤害 - 核心属性
+      element_damage: 1.5,
+      speed: 1.8,         // 高频位移
       precision: 1.3,
     },
-    description: '唐横刀狂战，极致输出，快速击倒',
+    description: 'T0 极致爆发/无敌帧 - 剑 + 扇，竞速本必备',
   },
   
-  // ===== 坦克流派 =====
-  '九枪·坦克': {
-    preferred_sets: ['防御套装', '坦克套装', '生命套装'],
+  '牵丝·玉': {
+    preferred_sets: ['远程套装', '增益套装', '护盾套装'],
     stat_weights: {
-      attack: 0.8,
-      defense: 1.8,
-      health: 1.8,
-      crit: 1.0,
-      crit_damage: 1.0,
-      element_damage: 1.0,
-      speed: 0.8,
-      precision: 0.8,
-    },
-    description: '九枪坦克，扛伤输出兼具',
-  },
-  
-  '裂石钧·防御': {
-    preferred_sets: ['玄钧套装', '防御套装', '反震套装'],
-    stat_weights: {
-      attack: 0.9,
-      defense: 1.7,
-      health: 1.5,
-      crit: 1.2,
-      crit_damage: 1.2,
-      element_damage: 1.1,
-      speed: 1.0,
-      precision: 0.8,
-    },
-    description: '裂石钧防御，以守为攻，反弹伤害',
-  },
-  
-  // ===== 辅助流派 =====
-  '医仙·治疗': {
-    preferred_sets: ['治疗套装', '辅助套装', '生命套装'],
-    stat_weights: {
-      attack: 0.5,
-      defense: 1.2,
-      health: 1.8,
-      crit: 1.3,
-      crit_damage: 1.0,
-      element_damage: 0.8,
-      speed: 1.0,
-      precision: 1.0,
-    },
-    description: '医仙治疗，团队核心，救死扶伤',
-  },
-  
-  '伞扇·辅助': {
-    preferred_sets: ['音律套装', '辅助套装', '控制套装'],
-    stat_weights: {
-      attack: 0.8,
+      attack: 1.6,
       defense: 1.0,
-      health: 1.5,
-      crit: 1.2,
-      crit_damage: 1.0,
-      element_damage: 1.3,
-      speed: 1.2,
-      precision: 1.0,
+      health: 1.2,
+      crit: 1.8,
+      crit_damage: 1.8,
+      element_damage: 1.4,
+      speed: 1.3,
+      precision: 1.5,     // 远程精准
     },
-    description: '伞扇辅助，控制增益，团队支援',
+    description: 'T0 远程风筝/团队增益 - 弓 + 伞，单刷最安全',
   },
   
-  // ===== 特殊流派 =====
-  '无名·基础': {
-    preferred_sets: ['无名套装', '通用套装'],
+  // ===== T0.5 梯队 =====
+  '破竹·风': {
+    preferred_sets: ['吸血套装', '连斩套装', '持续输出套装'],
     stat_weights: {
-      attack: 1.0,
+      attack: 1.7,
+      defense: 0.8,
+      health: 1.0,        // 吸血需要一定生存
+      crit: 1.9,
+      crit_damage: 1.9,
+      element_damage: 1.4,
+      speed: 1.9,         // 高频攻击
+      precision: 1.3,
+    },
+    description: 'T0.5 高频吸血/持续压制 - 剑 + 刀，站桩输出强',
+  },
+  
+  '破竹·尘': {
+    preferred_sets: ['控制套装', '辅助套装', '破防套装'],
+    stat_weights: {
+      attack: 1.4,
       defense: 1.0,
       health: 1.0,
-      crit: 1.0,
-      crit_damage: 1.0,
-      element_damage: 1.0,
-      speed: 1.0,
-      precision: 1.0,
+      crit: 1.6,
+      crit_damage: 1.6,
+      element_damage: 1.5,
+      speed: 1.4,
+      precision: 1.2,
     },
-    description: '无名基础，平衡发展，新手推荐',
+    description: 'T0.5 强力控制/团队辅助 - 剑 + 笛，高难本必备',
   },
   
-  '嗟夫·特殊': {
-    preferred_sets: ['嗟夫套装', '特殊套装'],
+  '鸣金·影': {
+    preferred_sets: ['流血套装', '近战套装', '爆发套装'],
+    stat_weights: {
+      attack: 1.7,
+      defense: 0.7,
+      health: 0.7,
+      crit: 1.9,
+      crit_damage: 1.9,
+      element_damage: 1.4,
+      speed: 1.6,
+      precision: 1.3,
+    },
+    description: 'T0.5 流血爆发/近战缠斗 - 枪 + 剑，高爆发数字',
+  },
+  
+  // ===== T1 梯队 =====
+  '鸣金·虹': {
+    preferred_sets: ['通用套装', '新手套装', '平衡套装'],
+    stat_weights: {
+      attack: 1.5,
+      defense: 0.9,
+      health: 0.9,
+      crit: 1.7,
+      crit_damage: 1.7,
+      element_damage: 1.3,
+      speed: 1.4,
+      precision: 1.2,
+    },
+    description: 'T1 中距离拉扯/新手友好 - 枪 + 弓，开荒体验极佳',
+  },
+  
+  '裂石·威': {
+    preferred_sets: ['防御套装', '格挡套装', '反击套装'],
+    stat_weights: {
+      attack: 1.2,
+      defense: 1.8,        // 核心属性
+      health: 1.5,         // 核心属性
+      crit: 1.3,
+      crit_damage: 1.3,
+      element_damage: 1.0,
+      speed: 0.9,
+      precision: 1.0,
+    },
+    description: 'T1 绝对防御/反击输出 - 重剑 + 盾，生存率最高',
+  },
+  
+  '裂石·钧': {
+    preferred_sets: ['破韧套装', '眩晕套装', '控制套装'],
+    stat_weights: {
+      attack: 1.4,
+      defense: 1.6,
+      health: 1.4,
+      crit: 1.4,
+      crit_damage: 1.4,
+      element_damage: 1.1,
+      speed: 1.0,
+      precision: 1.1,
+    },
+    description: 'T1 超级破韧/眩晕控制 - 重剑 + 锤，克制巨型 BOSS',
+  },
+  
+  '奇门·幻': {
+    preferred_sets: ['异常套装', '中毒套装', '控制套装'],
     stat_weights: {
       attack: 1.3,
       defense: 0.9,
-      health: 1.0,
+      health: 0.9,
       crit: 1.5,
       crit_damage: 1.5,
-      element_damage: 1.4,
-      speed: 1.3,
+      element_damage: 1.8,  // 异常状态核心
+      speed: 1.5,
       precision: 1.2,
     },
-    description: '嗟夫特殊，独特机制，灵活多变',
+    description: 'T1 诡异身法/异常状态 - 扇 + 笛，PVP 强势',
+  },
+  
+  // ===== T2 梯队 =====
+  '游龙·水': {
+    preferred_sets: ['机动套装', '闪避套装', '反击套装'],
+    stat_weights: {
+      attack: 1.5,
+      defense: 0.7,
+      health: 0.7,
+      crit: 1.7,
+      crit_damage: 1.7,
+      element_damage: 1.3,
+      speed: 2.0,           // 极致速度
+      precision: 1.3,
+    },
+    description: 'T2 高机动/闪避反击 - 刀 + 扇，适合高手秀操作',
   },
 }
 
@@ -372,10 +374,10 @@ export function getAvailableFlows() {
  */
 export function getFlowCategories() {
   return {
-    '输出流派': ['九剑·输出', '九枪·输出', '双刀·刺客', '唐横刀·狂战'],
-    '坦克流派': ['九枪·坦克', '裂石钧·防御'],
-    '辅助流派': ['医仙·治疗', '伞扇·辅助'],
-    '特殊流派': ['无名·基础', '嗟夫·特殊'],
+    'T0 梯队': ['破竹·鸢', '牵丝·玉'],
+    'T0.5 梯队': ['破竹·风', '破竹·尘', '鸣金·影'],
+    'T1 梯队': ['鸣金·虹', '裂石·威', '裂石·钧', '奇门·幻'],
+    'T2 梯队': ['游龙·水'],
     '其他': ['通用'],
   }
 }

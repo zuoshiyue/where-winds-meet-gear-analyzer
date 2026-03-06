@@ -48,67 +48,84 @@
       <el-form-item label="流派配置">
         <div class="class-configs">
           <el-collapse>
-            <el-collapse-item title="⚔️ 九剑·输出" name="1">
+            <el-collapse-item title="T0 破竹·鸢 ⚔️" name="1">
               <div class="config-item">
-                <p><strong>定位：</strong>九剑输出，攻守兼备，高机动性</p>
+                <p><strong>武器：</strong>剑 + 扇</p>
+                <p><strong>定位：</strong>极致爆发/无敌帧</p>
                 <p><strong>核心属性：</strong>攻击 > 暴击 ≈ 爆伤 > 速度</p>
-                <p><strong>推荐套装：</strong>剑心套装、疾风套装、暴击套装</p>
+                <p><strong>推荐理由：</strong>当前版本秒伤天花板，操作上限极高，竞速本必备</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🔪 唐横刀·狂战" name="2">
+            <el-collapse-item title="T0 牵丝·玉 🏹" name="2">
               <div class="config-item">
-                <p><strong>定位：</strong>唐横刀狂战，极致输出，快速击倒</p>
-                <p><strong>核心属性：</strong>攻击 > 爆伤 > 暴击</p>
-                <p><strong>推荐套装：</strong>霸刀套装、铁血套装、强攻套装</p>
+                <p><strong>武器：</strong>弓 + 伞</p>
+                <p><strong>定位：</strong>远程风筝/团队增益</p>
+                <p><strong>核心属性：</strong>攻击 > 暴击 > 精准</p>
+                <p><strong>推荐理由：</strong>单刷最安全，组队最抢手，容错率与输出并存</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🗡️ 双刀·刺客" name="3">
+            <el-collapse-item title="T0.5 破竹·风 ⚔️" name="3">
               <div class="config-item">
-                <p><strong>定位：</strong>双刀刺客，高风险高回报，一击必杀</p>
-                <p><strong>核心属性：</strong>暴击 ≈ 爆伤 > 速度 > 攻击</p>
-                <p><strong>推荐套装：</strong>暗影套装、潜行套装、暴击套装</p>
+                <p><strong>武器：</strong>剑 + 刀</p>
+                <p><strong>定位：</strong>高频吸血/持续压制</p>
+                <p><strong>核心属性：</strong>攻击 > 暴击 > 速度</p>
+                <p><strong>推荐理由：</strong>生存能力优秀的输出流，低延迟下表现超越 T0</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🛡️ 九枪·坦克" name="4">
+            <el-collapse-item title="T0.5 破竹·尘 🎵" name="4">
               <div class="config-item">
-                <p><strong>定位：</strong>九枪坦克，扛伤输出兼具</p>
-                <p><strong>核心属性：</strong>防御 ≈ 生命 > 攻击</p>
-                <p><strong>推荐套装：</strong>防御套装、坦克套装、生命套装</p>
+                <p><strong>武器：</strong>剑 + 笛</p>
+                <p><strong>定位：</strong>强力控制/团队辅助</p>
+                <p><strong>核心属性：</strong>攻击 > 元素 > 控制</p>
+                <p><strong>推荐理由：</strong>高难副本必备辅助，能极大降低全队承伤压力</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🛡️ 裂石钧·防御" name="5">
+            <el-collapse-item title="T0.5 鸣金·影 🔱" name="5">
               <div class="config-item">
-                <p><strong>定位：</strong>裂石钧防御，以守为攻，反弹伤害</p>
+                <p><strong>武器：</strong>枪 + 剑</p>
+                <p><strong>定位：</strong>流血爆发/近战缠斗</p>
+                <p><strong>核心属性：</strong>攻击 > 暴击 > 爆伤</p>
+                <p><strong>推荐理由：</strong>喜欢近战操作感和高爆发数字的玩家首选</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="T1 鸣金·虹 🏹" name="6">
+              <div class="config-item">
+                <p><strong>武器：</strong>枪 + 弓</p>
+                <p><strong>定位：</strong>中距离拉扯/新手友好</p>
+                <p><strong>核心属性：</strong>攻击 > 暴击 > 平衡</p>
+                <p><strong>推荐理由：</strong>新手入坑首选，开荒体验极佳，几乎无短板</p>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="T1 裂石·威 🛡️" name="7">
+              <div class="config-item">
+                <p><strong>武器：</strong>重剑 + 盾</p>
+                <p><strong>定位：</strong>绝对防御/反击输出</p>
                 <p><strong>核心属性：</strong>防御 > 生命 > 攻击</p>
-                <p><strong>推荐套装：</strong>玄钧套装、防御套装、反震套装</p>
+                <p><strong>推荐理由：</strong>独狼玩家福音，面对高攻 BOSS 时生存率最高</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="💚 医仙·治疗" name="6">
+            <el-collapse-item title="T1 裂石·钧 🔨" name="8">
               <div class="config-item">
-                <p><strong>定位：</strong>医仙治疗，团队核心，救死扶伤</p>
-                <p><strong>核心属性：</strong>生命 > 防御 > 暴击</p>
-                <p><strong>推荐套装：</strong>治疗套装、辅助套装、生命套装</p>
+                <p><strong>武器：</strong>重剑 + 锤</p>
+                <p><strong>定位：</strong>超级破韧/眩晕控制</p>
+                <p><strong>核心属性：</strong>防御 > 破韧 > 生命</p>
+                <p><strong>推荐理由：</strong>适合对付霸体多、韧性高的巨型 BOSS</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="🎵 伞扇·辅助" name="7">
+            <el-collapse-item title="T1 奇门·幻 🎭" name="9">
               <div class="config-item">
-                <p><strong>定位：</strong>伞扇辅助，控制增益，团队支援</p>
-                <p><strong>核心属性：</strong>生命 > 元素 > 防御</p>
-                <p><strong>推荐套装：</strong>音律套装、辅助套装、控制套装</p>
+                <p><strong>武器：</strong>扇 + 笛</p>
+                <p><strong>定位：</strong>诡异身法/异常状态</p>
+                <p><strong>核心属性：</strong>元素 > 暴击 > 速度</p>
+                <p><strong>推荐理由：</strong>PVP 强势，PVE 中适合处理特定机制怪</p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="👊 无名·基础" name="8">
+            <el-collapse-item title="T2 游龙·水 💧" name="10">
               <div class="config-item">
-                <p><strong>定位：</strong>无名基础，平衡发展，新手推荐</p>
-                <p><strong>核心属性：</strong>全属性平衡</p>
-                <p><strong>推荐套装：</strong>无名套装、通用套装</p>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="🔮 嗟夫·特殊" name="9">
-              <div class="config-item">
-                <p><strong>定位：</strong>嗟夫特殊，独特机制，灵活多变</p>
-                <p><strong>核心属性：</strong>暴击 > 爆伤 > 元素</p>
-                <p><strong>推荐套装：</strong>嗟夫套装、特殊套装</p>
+                <p><strong>武器：</strong>刀 + 扇</p>
+                <p><strong>定位：</strong>高机动/闪避反击</p>
+                <p><strong>核心属性：</strong>速度 > 暴击 > 攻击</p>
+                <p><strong>推荐理由：</strong>适合高手秀操作，普通玩家容易空大</p>
               </div>
             </el-collapse-item>
           </el-collapse>
