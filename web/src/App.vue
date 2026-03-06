@@ -2,8 +2,13 @@
   <div class="app-container">
     <!-- 头部 -->
     <header class="app-header">
-      <h1>🎮 燕云装备助手</h1>
-      <p class="subtitle">燕云十六声装备分析工具</p>
+      <div class="logo-section">
+        <img src="/logo.svg" alt="燕云十六声" class="game-logo" onerror="this.style.display='none'" />
+        <div class="title-section">
+          <h1>🎮 燕云装备助手</h1>
+          <p class="subtitle">燕云十六声装备分析工具</p>
+        </div>
+      </div>
     </header>
 
     <!-- 主内容区 -->
@@ -142,9 +147,27 @@ const handleDelete = async (id) => {
   margin-bottom: 20px;
 }
 
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.game-logo {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.title-section {
+  text-align: left;
+}
+
 .app-header h1 {
   margin: 0;
-  font-size: 2.5em;
+  font-size: 2em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 

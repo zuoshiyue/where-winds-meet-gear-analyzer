@@ -17,7 +17,8 @@
       </div>
       <template #tip>
         <div class="el-upload__tip">
-          支持批量上传，上传后点击"开始识别"按钮
+          拖拽截图到此处 或 <em>点击上传</em><br/>
+          <span class="paste-hint">💡 也可以直接 Ctrl+V 粘贴截图</span>
         </div>
       </template>
     </el-upload>
@@ -48,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { UploadFilled } from '@element-plus/icons-vue'
 import { createWorker } from 'tesseract.js'
@@ -63,6 +64,41 @@ const isProcessing = ref(false)
 const progressPercent = ref(0)
 const progressStatus = ref('success')
 const ocrLogs = ref([])
+
+// 处理粘贴事件
+const handlePaste = async (event) => {
+  const items = event.clipboardData?.items;
+  if (!items) return;
+
+  const images = [];
+  for (const item of items) {
+    if (item.type.startsWith('image/')) {
+      const blob = item.getAsFile();
+      const file = new File([blob], `pasted-${Date.now()}.png`, { type: item.type });
+      images.push(file);
+    }
+  }
+
+  if (images.length > 0) {
+    ElMessage.success(`已粘贴 ${images.length} 张截图`);
+    // 添加到文件列表
+    fileList.value = [...fileList.value, ...images.map(img => ({
+      name: img.name,
+      raw: img,
+      url: URL.createObjectURL(img)
+    }))];
+    // 自动开始识别
+    setTimeout(() => startOCR(), 500);
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('paste', handlePaste);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('paste', handlePaste);
+});
 
 // 处理文件选择
 const handleFileChange = (file, files) => {
@@ -209,5 +245,12 @@ const progressFormat = (percent) => {
 
 .log-item:last-child {
   border-bottom: none;
+}
+
+.paste-hint {
+  font-size: 12px;
+  color: #409EFF;
+  margin-top: 5px;
+  display: block;
 }
 </style>
