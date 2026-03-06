@@ -2,8 +2,22 @@
  * 装备评分模块
  * 根据燕云十六声武器心法流派计算装备评分
  * 
- * 燕云十六声是武器心法决定的流派制度，非固定职业
- * 参考：https://wwm-db.com/zh/
+ * 参考项目:
+ * - 燕云伤害模拟器：https://kaph404.github.io/Yanyun-calculator/
+ * - 燕云十六声攻略站：https://yy16s.github.io/
+ * 
+ * 核心属性:
+ * - 会心率 (暴击率) - 基准伤害 150%
+ * - 会心伤害 (爆伤) - 默认 150%
+ * - 会意率 - 特殊属性
+ * - 会意伤害 - 默认 135%
+ * - 精准率
+ * 
+ * 流派分类 (玩家通用):
+ * - 鸣金 (无名、九九)
+ * - 裂石 (姐夫、刀法)
+ * - 牵丝 (玉玉、霖霖)
+ * - 破竹 (风尘、尘尘)
  */
 
 // 品质基础分
@@ -15,27 +29,30 @@ const QUALITY_SCORES = {
   5: 150, // 金色
 }
 
-// 默认属性权重
+// 默认属性权重 (参考玩家通用标准)
 const DEFAULT_STAT_WEIGHTS = {
-  attack: 1.0,        // 攻击
+  attack: 1.0,        // 攻击 (外功)
   defense: 0.8,       // 防御
   health: 0.7,        // 生命
-  crit: 1.5,          // 暴击
-  crit_damage: 1.5,   // 爆伤
+  crit: 1.5,          // 会心率 (暴击)
+  crit_damage: 1.5,   // 会心伤害 (爆伤)
   element_damage: 1.3, // 元素伤害
   speed: 1.0,         // 速度/攻速
+  precision: 1.0,     // 精准率
 }
 
 /**
  * 武器/心法流派配置
  * 
  * 燕云十六声采用自由流派系统，由武器和心法决定玩法
- * 参考玩家通用命名和 wwm-db.com 数据
+ * 参考玩家通用命名和 wwm-db.com 数据，以及伤害计算器项目
  * 
- * 玩家通用命名：
+ * 玩家通用命名:
  * - 无名 (基础)、九剑 (剑)、九枪 (枪)、双刀 (双刃)
  * - 唐横刀 (刀)、裂石钧 (坦克)、伞扇 (伞)
  * - 嗟夫 (特殊武器) 等
+ * 
+ * 参考：https://kaph404.github.io/Yanyun-calculator/
  */
 const FLOW_CONFIGS = {
   '通用': {
@@ -51,10 +68,11 @@ const FLOW_CONFIGS = {
       attack: 1.5,
       defense: 1.0,
       health: 0.8,
-      crit: 1.8,
-      crit_damage: 1.8,
+      crit: 1.8,        // 会心率 - 核心属性
+      crit_damage: 1.8, // 会心伤害 - 核心属性
       element_damage: 1.3,
       speed: 1.5,
+      precision: 1.2,   // 精准率
     },
     description: '九剑输出，攻守兼备，高机动性',
   },
@@ -69,6 +87,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.9,
       element_damage: 1.4,
       speed: 1.3,
+      precision: 1.2,
     },
     description: '九枪输出，长柄范围，高爆发',
   },
@@ -79,10 +98,11 @@ const FLOW_CONFIGS = {
       attack: 1.4,
       defense: 0.5,
       health: 0.5,
-      crit: 2.0,
-      crit_damage: 2.0,
+      crit: 2.0,        // 会心率 - 极致堆叠
+      crit_damage: 2.0, // 会心伤害 - 极致堆叠
       element_damage: 1.5,
       speed: 1.6,
+      precision: 1.5,   // 精准率 - 确保命中
     },
     description: '双刀刺客，高风险高回报，一击必杀',
   },
@@ -97,6 +117,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.9,
       element_damage: 1.4,
       speed: 1.2,
+      precision: 1.3,
     },
     description: '唐横刀狂战，极致输出，快速击倒',
   },
@@ -112,6 +133,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.0,
       element_damage: 1.0,
       speed: 0.8,
+      precision: 0.8,
     },
     description: '九枪坦克，扛伤输出兼具',
   },
@@ -126,6 +148,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.2,
       element_damage: 1.1,
       speed: 1.0,
+      precision: 0.8,
     },
     description: '裂石钧防御，以守为攻，反弹伤害',
   },
@@ -141,6 +164,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.0,
       element_damage: 0.8,
       speed: 1.0,
+      precision: 1.0,
     },
     description: '医仙治疗，团队核心，救死扶伤',
   },
@@ -155,6 +179,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.0,
       element_damage: 1.3,
       speed: 1.2,
+      precision: 1.0,
     },
     description: '伞扇辅助，控制增益，团队支援',
   },
@@ -170,6 +195,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.0,
       element_damage: 1.0,
       speed: 1.0,
+      precision: 1.0,
     },
     description: '无名基础，平衡发展，新手推荐',
   },
@@ -184,6 +210,7 @@ const FLOW_CONFIGS = {
       crit_damage: 1.5,
       element_damage: 1.4,
       speed: 1.3,
+      precision: 1.2,
     },
     description: '嗟夫特殊，独特机制，灵活多变',
   },
