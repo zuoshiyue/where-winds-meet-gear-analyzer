@@ -14,49 +14,78 @@
           <el-card class="download-card" shadow="hover">
             <template #header>
               <div class="card-header">
-                <span class="title">📦 立即下载</span>
+                <span class="title">📦 工具下载</span>
                 <el-tag type="success" size="small">v1.0</el-tag>
               </div>
             </template>
 
-            <div class="download-info">
-              <div class="info-row">
-                <span class="label">版本：</span>
-                <span class="value">v1.0 (2026-03-06)</span>
-              </div>
-              <div class="info-row">
-                <span class="label">大小：</span>
-                <span class="value">~50 KB</span>
-              </div>
-              <div class="info-row">
-                <span class="label">系统：</span>
-                <span class="value">Windows 10/11</span>
-              </div>
-              <div class="info-row">
-                <span class="label">环境：</span>
-                <span class="value">Python 3.8+</span>
-              </div>
-            </div>
+            <el-tabs type="border-card">
+              <!-- 自动截图工具 -->
+              <el-tab-pane label="📸 自动截图">
+                <div class="download-info">
+                  <div class="info-row">
+                    <span class="label">工具名称：</span>
+                    <span class="value">自动截图工具</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">功能：</span>
+                    <span class="value">热键 F9 一键截图游戏窗口</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">大小：</span>
+                    <span class="value">~50 KB</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">系统：</span>
+                    <span class="value">Windows 10/11</span>
+                  </div>
+                </div>
+                <div class="download-buttons">
+                  <el-button
+                    type="primary"
+                    size="large"
+                    @click="downloadTool('auto_capture')"
+                    class="download-btn"
+                  >
+                    <el-icon><Download /></el-icon>
+                    下载截图工具
+                  </el-button>
+                </div>
+              </el-tab-pane>
 
-            <div class="download-buttons">
-              <el-button
-                type="primary"
-                size="large"
-                @click="downloadTool"
-                class="download-btn"
-              >
-                <el-icon><Download /></el-icon>
-                下载工具包
-              </el-button>
-
-              <el-button
-                size="large"
-                @click="openGitHub"
-              >
-                <el-icon><Link /></el-icon>
-                GitHub 仓库
-              </el-button>
-            </div>
+              <!-- 批量扫描工具 -->
+              <el-tab-pane label="🔍 批量扫描">
+                <div class="download-info">
+                  <div class="info-row">
+                    <span class="label">工具名称：</span>
+                    <span class="value">装备批量扫描工具</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">功能：</span>
+                    <span class="value">OCR 识别装备并导出 JSON</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">大小：</span>
+                    <span class="value">~100 KB</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="label">系统：</span>
+                    <span class="value">Windows 10/11 + Tesseract-OCR</span>
+                  </div>
+                </div>
+                <div class="download-buttons">
+                  <el-button
+                    type="success"
+                    size="large"
+                    @click="downloadTool('scanner')"
+                    class="download-btn"
+                  >
+                    <el-icon><Download /></el-icon>
+                    下载扫描工具
+                  </el-button>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
 
             <el-alert
               title="💡 首次使用？请看下方教程"
@@ -242,20 +271,28 @@
 import { Download, Link } from '@element-plus/icons-vue'
 
 // 下载工具包
-const downloadTool = () => {
-  // 创建 ZIP 下载
-  // 实际部署时需要打包 tools 目录
-  const downloadUrl = '/tools/燕云装备助手 - 自动截图工具-v1.0.zip'
+const downloadTool = (type) => {
+  let downloadUrl = ''
+  let filename = ''
+  
+  if (type === 'auto_capture') {
+    // 自动截图工具
+    downloadUrl = 'https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/archive/refs/heads/main.zip'
+    filename = '燕云装备助手 - 自动截图工具-v1.0.zip'
+    alert('📦 下载即将开始！\n\n解压后查看 tools/ 目录\n📄 使用说明：tools/README.md\n⌨️ 快速启动：双击"快速启动.bat"')
+  } else if (type === 'scanner') {
+    // 批量扫描工具
+    downloadUrl = 'https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/archive/refs/heads/main.zip'
+    filename = '燕云装备助手 - 批量扫描工具-v1.0.zip'
+    alert('📦 下载即将开始！\n\n解压后查看 tools/ 目录\n📄 使用说明：tools/README_scanner.md\n⚠️ 需要先安装 Tesseract-OCR')
+  }
   
   const a = document.createElement('a')
   a.href = downloadUrl
-  a.download = '燕云装备助手 - 自动截图工具-v1.0.zip'
+  a.download = filename
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
-  
-  // 显示提示
-  alert('📦 下载即将开始！\n\n解压后请查看 README.md 了解详细使用说明')
 }
 
 // 打开 GitHub
