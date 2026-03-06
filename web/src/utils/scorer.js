@@ -30,9 +30,12 @@ const DEFAULT_STAT_WEIGHTS = {
  * 武器/心法流派配置
  * 
  * 燕云十六声采用自由流派系统，由武器和心法决定玩法
- * 目前已知的武器类型：剑、枪、双刃、刀、伞等 12 种
+ * 参考玩家通用命名和 wwm-db.com 数据
  * 
- * 参考：https://wwm-db.com/zh/weapons/
+ * 玩家通用命名：
+ * - 无名 (基础)、九剑 (剑)、九枪 (枪)、双刀 (双刃)
+ * - 唐横刀 (刀)、裂石钧 (坦克)、伞扇 (伞)
+ * - 嗟夫 (特殊武器) 等
  */
 const FLOW_CONFIGS = {
   '通用': {
@@ -42,7 +45,7 @@ const FLOW_CONFIGS = {
   },
   
   // ===== 输出流派 =====
-  '剑法·输出': {
+  '九剑·输出': {
     preferred_sets: ['剑心套装', '疾风套装', '暴击套装'],
     stat_weights: {
       attack: 1.5,
@@ -53,10 +56,10 @@ const FLOW_CONFIGS = {
       element_damage: 1.3,
       speed: 1.5,
     },
-    description: '剑法输出，攻守兼备，高机动性',
+    description: '九剑输出，攻守兼备，高机动性',
   },
   
-  '枪法·输出': {
+  '九枪·输出': {
     preferred_sets: ['长枪套装', '破军套装', '暴击套装'],
     stat_weights: {
       attack: 1.6,
@@ -67,10 +70,10 @@ const FLOW_CONFIGS = {
       element_damage: 1.4,
       speed: 1.3,
     },
-    description: '枪法输出，长柄范围，高爆发',
+    description: '九枪输出，长柄范围，高爆发',
   },
   
-  '双刃·刺客': {
+  '双刀·刺客': {
     preferred_sets: ['暗影套装', '潜行套装', '暴击套装'],
     stat_weights: {
       attack: 1.4,
@@ -81,10 +84,10 @@ const FLOW_CONFIGS = {
       element_damage: 1.5,
       speed: 1.6,
     },
-    description: '双刃刺客，高风险高回报，一击必杀',
+    description: '双刀刺客，高风险高回报，一击必杀',
   },
   
-  '刀法·狂战': {
+  '唐横刀·狂战': {
     preferred_sets: ['霸刀套装', '铁血套装', '强攻套装'],
     stat_weights: {
       attack: 1.8,
@@ -95,11 +98,11 @@ const FLOW_CONFIGS = {
       element_damage: 1.4,
       speed: 1.2,
     },
-    description: '刀法狂战，极致输出，快速击倒',
+    description: '唐横刀狂战，极致输出，快速击倒',
   },
   
   // ===== 坦克流派 =====
-  '枪法·坦克': {
+  '九枪·坦克': {
     preferred_sets: ['防御套装', '坦克套装', '生命套装'],
     stat_weights: {
       attack: 0.8,
@@ -110,11 +113,11 @@ const FLOW_CONFIGS = {
       element_damage: 1.0,
       speed: 0.8,
     },
-    description: '枪法坦克，扛伤输出兼具',
+    description: '九枪坦克，扛伤输出兼具',
   },
   
-  '伞法·防御': {
-    preferred_sets: ['玄伞套装', '防御套装', '反震套装'],
+  '裂石钧·防御': {
+    preferred_sets: ['玄钧套装', '防御套装', '反震套装'],
     stat_weights: {
       attack: 0.9,
       defense: 1.7,
@@ -124,7 +127,7 @@ const FLOW_CONFIGS = {
       element_damage: 1.1,
       speed: 1.0,
     },
-    description: '伞法防御，以守为攻，反弹伤害',
+    description: '裂石钧防御，以守为攻，反弹伤害',
   },
   
   // ===== 辅助流派 =====
@@ -142,7 +145,7 @@ const FLOW_CONFIGS = {
     description: '医仙治疗，团队核心，救死扶伤',
   },
   
-  '琴法·辅助': {
+  '伞扇·辅助': {
     preferred_sets: ['音律套装', '辅助套装', '控制套装'],
     stat_weights: {
       attack: 0.8,
@@ -153,36 +156,36 @@ const FLOW_CONFIGS = {
       element_damage: 1.3,
       speed: 1.2,
     },
-    description: '琴法辅助，控制增益，团队支援',
+    description: '伞扇辅助，控制增益，团队支援',
   },
   
   // ===== 特殊流派 =====
-  '拳法·格斗': {
-    preferred_sets: ['拳法套装', '格斗套装', '近身套装'],
+  '无名·基础': {
+    preferred_sets: ['无名套装', '通用套装'],
     stat_weights: {
-      attack: 1.6,
-      defense: 1.2,
+      attack: 1.0,
+      defense: 1.0,
       health: 1.0,
-      crit: 1.5,
-      crit_damage: 1.6,
-      element_damage: 1.2,
-      speed: 1.8,
+      crit: 1.0,
+      crit_damage: 1.0,
+      element_damage: 1.0,
+      speed: 1.0,
     },
-    description: '拳法格斗，高频率攻击，连招快感',
+    description: '无名基础，平衡发展，新手推荐',
   },
   
-  '暗器·远程': {
-    preferred_sets: ['暗器套装', '远程套装', '精准套装'],
+  '嗟夫·特殊': {
+    preferred_sets: ['嗟夫套装', '特殊套装'],
     stat_weights: {
-      attack: 1.5,
-      defense: 0.7,
-      health: 0.7,
-      crit: 1.8,
-      crit_damage: 1.7,
+      attack: 1.3,
+      defense: 0.9,
+      health: 1.0,
+      crit: 1.5,
+      crit_damage: 1.5,
       element_damage: 1.4,
-      speed: 1.4,
+      speed: 1.3,
     },
-    description: '暗器远程，灵活走位，持续输出',
+    description: '嗟夫特殊，独特机制，灵活多变',
   },
 }
 
@@ -342,10 +345,10 @@ export function getAvailableFlows() {
  */
 export function getFlowCategories() {
   return {
-    '输出流派': ['剑法·输出', '枪法·输出', '双刃·刺客', '刀法·狂战'],
-    '坦克流派': ['枪法·坦克', '伞法·防御'],
-    '辅助流派': ['医仙·治疗', '琴法·辅助'],
-    '特殊流派': ['拳法·格斗', '暗器·远程'],
+    '输出流派': ['九剑·输出', '九枪·输出', '双刀·刺客', '唐横刀·狂战'],
+    '坦克流派': ['九枪·坦克', '裂石钧·防御'],
+    '辅助流派': ['医仙·治疗', '伞扇·辅助'],
+    '特殊流派': ['无名·基础', '嗟夫·特殊'],
     '其他': ['通用'],
   }
 }
