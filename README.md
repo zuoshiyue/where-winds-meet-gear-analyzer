@@ -10,6 +10,23 @@
 
 ---
 
+## 🤖 项目开发声明
+
+**本项目由 [OpenClaw](https://github.com/openclaw/openclaw) AI 助手独立完成**
+
+- **开发时间：** 2026-03-06
+- **开发模式：** AI 自主开发
+- **技术栈：** Vue 3 + Vite + Element Plus + Tesseract.js
+- **部署平台：** GitHub Pages
+
+OpenClaw 是一个开源的 AI 助手框架，本项目展示了其完整的开发能力：
+- ✅ 需求分析与规划
+- ✅ 代码编写与测试
+- ✅ 项目部署与发布
+- ✅ 文档撰写与维护
+
+---
+
 ## ✨ 特性
 
 ### Web 版 (当前版本)

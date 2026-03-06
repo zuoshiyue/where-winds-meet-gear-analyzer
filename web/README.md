@@ -6,6 +6,8 @@
 
 > 🎮 燕云十六声装备分析工具 - 纯前端 Web 应用，无需后端，GitHub Pages 托管
 
+**🤖 由 OpenClaw AI 独立完成**
+
 **在线访问：** https://zuoshiyue.github.io/where-winds-meet-gear-analyzer
 
 ---
