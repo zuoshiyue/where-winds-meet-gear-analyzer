@@ -1,0 +1,13 @@
+# 燕云装备助手 - 自动截图工具依赖
+
+# 核心依赖
+pyautogui>=0.9.54
+Pillow>=10.0.0
+pygetwindow>=0.0.9
+keyboard>=0.13.5
+
+# 可选依赖（自动上传功能）
+# requests>=2.31.0
+
+# 安装命令:
+# pip install -r requirements.txt

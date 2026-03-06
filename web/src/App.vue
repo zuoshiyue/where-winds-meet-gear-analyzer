@@ -148,17 +148,17 @@ const handleDelete = async (id) => {
 
 // 打开下载页面
 const openDownloadPage = () => {
-  // 方式 1：打开下载页面组件（如果有路由）
-  // window.open('/download', '_blank')
+  // 直接下载工具包
+  const downloadUrl = '/tools/燕云装备助手.zip'
   
-  // 方式 2：直接下载 ZIP 文件
-  // const downloadUrl = '/tools/燕云装备助手 - 自动截图工具-v1.0.zip'
-  // window.open(downloadUrl, '_blank')
+  const a = document.createElement('a')
+  a.href = downloadUrl
+  a.download = '燕云装备助手 - 工具包.zip'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
   
-  // 方式 3：打开 GitHub releases
-  window.open('https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/tree/main/tools', '_blank')
-  
-  ElMessage.info('📦 正在打开工具下载页面...')
+  ElMessage.success('📦 下载已开始，请查看浏览器下载栏')
 }
 </script>
 

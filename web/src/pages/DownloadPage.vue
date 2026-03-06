@@ -274,25 +274,30 @@ import { Download, Link } from '@element-plus/icons-vue'
 const downloadTool = (type) => {
   let downloadUrl = ''
   let filename = ''
+  let message = ''
   
   if (type === 'auto_capture') {
     // 自动截图工具
-    downloadUrl = 'https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/archive/refs/heads/main.zip'
+    downloadUrl = '/tools/燕云装备助手.zip'
     filename = '燕云装备助手 - 自动截图工具-v1.0.zip'
-    alert('📦 下载即将开始！\n\n解压后查看 tools/ 目录\n📄 使用说明：tools/README.md\n⌨️ 快速启动：双击"快速启动.bat"')
+    message = '📦 下载即将开始！\n\n✅ 包含文件：\n- auto_capture.py (主程序)\n- config.example.json (配置示例)\n- requirements.txt (依赖)\n- README.md (使用说明)\n- 快速启动.bat (一键启动)\n\n📄 使用说明：解压后查看 README.md\n⌨️ 快速启动：双击"快速启动.bat"'
   } else if (type === 'scanner') {
     // 批量扫描工具
-    downloadUrl = 'https://github.com/zuoshiyue/where-winds-meet-gear-analyzer/archive/refs/heads/main.zip'
+    downloadUrl = '/tools/scanner.zip'
     filename = '燕云装备助手 - 批量扫描工具-v1.0.zip'
-    alert('📦 下载即将开始！\n\n解压后查看 tools/ 目录\n📄 使用说明：tools/README_scanner.md\n⚠️ 需要先安装 Tesseract-OCR')
+    message = '📦 下载即将开始！\n\n✅ 包含文件：\n- equipment_scanner.py (主程序)\n- requirements_scanner.txt (OCR 依赖)\n- README_scanner.md (使用说明)\n- 快速启动 - 扫描工具.bat (一键启动)\n\n⚠️ 需要先安装 Tesseract-OCR\n📄 使用说明：解压后查看 README_scanner.md'
   }
   
+  // 创建下载链接
   const a = document.createElement('a')
   a.href = downloadUrl
   a.download = filename
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
+  
+  // 显示提示
+  alert(message)
 }
 
 // 打开 GitHub

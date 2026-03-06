@@ -1,0 +1,23 @@
+# 燕云装备助手 - 装备批量扫描工具依赖
+
+# 核心依赖
+pyautogui>=0.9.54
+Pillow>=10.0.0
+pygetwindow>=0.0.9
+keyboard>=0.13.5
+
+# OCR 依赖
+pytesseract>=0.3.10
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# 可选依赖（自动上传功能）
+# requests>=2.31.0
+
+# 安装命令:
+# pip install -r requirements_scanner.txt
+
+# 注意：
+# Windows 用户还需要安装 Tesseract-OCR 引擎
+# 下载地址：https://github.com/UB-Mannheim/tesseract/wiki
+# 安装后配置 pytesseract.pytesseract.tesseract_cmd 路径
