@@ -162,8 +162,8 @@ export const EMBRYO_RATINGS = {
  */
 export const DIEYIN_CONFIG = {
   maxLevels: 5, // 最大叠音次数
- 词条上限：4, // 最终词条数量
- 每叠音消耗：'叠音石', // 强化材料
+  maxStats: 4, // 最终词条数量
+  costItem: '叠音石', // 强化材料
 }
 
 /**
