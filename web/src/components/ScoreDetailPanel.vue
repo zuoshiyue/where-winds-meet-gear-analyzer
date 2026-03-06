@@ -183,7 +183,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { QuestionFilled } from '@element-plus/icons-vue'
-import { calculateScore, CLASS_CONFIGS } from '../utils/scorer'
+import { calculateScore, getFlowCategories } from '../utils/scorer'
 
 const props = defineProps({
   equipment: {
@@ -212,7 +212,26 @@ const scoreData = computed(() => {
 const statsWithScore = computed(() => {
   if (!props.equipment?.stats) return []
   
-  const weights = CLASS_CONFIGS[props.className]?.stat_weights || {}
+  // 获取流派权重配置
+  const flowCategories = getFlowCategories()
+  let weights = {}
+  
+  // 查找当前流派的权重
+  for (const category of Object.values(flowCategories)) {
+    if (Array.isArray(category)) {
+      for (const flow of category) {
+        if (flow === props.className) {
+          // 这里需要从 scorer.js 获取权重，暂时使用默认值
+          weights = getDefaultWeights(props.className)
+          break
+        }
+      }
+    }
+  }
+  
+  if (!Object.keys(weights).length) {
+    weights = getDefaultWeights('通用')
+  }
   
   return props.equipment.stats.map(stat => ({
     ...stat,
@@ -220,6 +239,33 @@ const statsWithScore = computed(() => {
     description: getStatDescription(stat.name, stat.value, weights[stat.name])
   }))
 })
+
+// 获取默认权重
+function getDefaultWeights(flowName) {
+  const defaultWeights = {
+    attack: 1.0,
+    defense: 0.8,
+    health: 0.7,
+    crit: 1.5,
+    crit_damage: 1.5,
+    element_damage: 1.3,
+    speed: 1.0,
+    precision: 1.0,
+  }
+  
+  // 根据流派返回不同权重 (简化版)
+  if (flowName.includes('输出') || flowName.includes('刺客') || flowName.includes('狂战')) {
+    return { ...defaultWeights, crit: 1.8, crit_damage: 1.8, attack: 1.5 }
+  }
+  if (flowName.includes('坦克') || flowName.includes('防御')) {
+    return { ...defaultWeights, defense: 1.8, health: 1.8, attack: 0.8 }
+  }
+  if (flowName.includes('治疗') || flowName.includes('辅助')) {
+    return { ...defaultWeights, health: 1.8, defense: 1.2, attack: 0.5 }
+  }
+  
+  return defaultWeights
+}
 
 // 品质参考表
 const qualityReference = computed(() => [
@@ -232,7 +278,7 @@ const qualityReference = computed(() => [
 
 // 职业权重参考表
 const weightReference = computed(() => {
-  const stats = ['attack', 'defense', 'health', 'crit', 'crit_damage', 'element_damage', 'speed']
+  const stats = ['attack', 'defense', 'health', 'crit', 'crit_damage', 'element_damage', 'speed', 'precision']
   const statNames = {
     attack: '攻击',
     defense: '防御',
@@ -241,14 +287,17 @@ const weightReference = computed(() => {
     crit_damage: '爆伤',
     element_damage: '元素伤害',
     speed: '速度',
+    precision: '精准',
   }
+  
+  const flows = ['通用', '九剑·输出', '九枪·输出', '双刀·刺客', '唐横刀·狂战', '九枪·坦克', '裂石钧·防御', '医仙·治疗', '伞扇·辅助', '无名·基础', '嗟夫·特殊']
   
   return stats.map(stat => ({
     stat: statNames[stat],
     weights: Object.fromEntries(
-      Object.entries(CLASS_CONFIGS).map(([cls, config]) => [
-        cls,
-        config.stat_weights[stat] || 0
+      flows.map(flow => [
+        flow,
+        getDefaultWeights(flow)[stat] || 1.0
       ])
     )
   }))
