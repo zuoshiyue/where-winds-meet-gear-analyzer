@@ -1,0 +1,37 @@
+{
+  "name": "where-winds-meet-gear-analyzer-web",
+  "version": "0.1.0",
+  "description": "燕云十六声装备分析工具 - Web 版",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && npx gh-pages -d dist"
+  },
+  "dependencies": {
+    "vue": "^3.4.0",
+    "element-plus": "^2.5.0",
+    "tesseract.js": "^5.0.0",
+    "localforage": "^1.10.0",
+    "echarts": "^5.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.0.0",
+    "gh-pages": "^6.1.0"
+  },
+  "keywords": [
+    "燕云十六声",
+    "装备分析",
+    "game-tools",
+    "vue",
+    "ocr"
+  ],
+  "author": "zuoshiyue",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zuoshiyue/where-winds-meet-gear-analyzer.git"
+  }
+}

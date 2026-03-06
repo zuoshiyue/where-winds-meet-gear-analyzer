@@ -9,81 +9,66 @@
 
 ## 📋 开发检查点清单
 
-### Phase 1 - 项目初始化 ✅
+### Phase 1 - 项目重构初始化 🔄
 - [x] 创建项目目录结构
 - [x] 初始化 Git 仓库
 - [x] 创建 README.md
 - [x] 创建开发文档
 - [x] 创建 .gitignore
-- [x] 创建 requirements.txt
-- [x] 创建 config.yaml 模板
-- [x] 创建基础 Python 包结构
+- [ ] 创建 Vite + Vue.js 项目
+- [ ] 配置 GitHub Pages 部署
+- [ ] 创建基础前端结构
 
-### Phase 2 - 核心模块开发 ✅
-- [x] 截图模块 (src/screenshot/)
-  - [x] 实现截图功能 (capture.py)
-  - [x] 实现区域识别 (region.py)
-  - [ ] 添加快捷键监听
-- [x] OCR 模块 (src/ocr/)
-  - [x] 集成 PaddleOCR
-  - [x] 实现图像预处理 (preprocessor.py)
-  - [x] 实现装备数据解析 (parser.py)
-  - [ ] 测试 OCR 准确率
-- [x] 数据库模块 (src/database/)
-  - [x] 定义数据模型 (models.py)
-  - [x] 实现数据操作 (repository.py)
-  - [x] 配置 SQLAlchemy
-  - [x] 初始化数据库
+### Phase 2 - 前端核心模块 🔄
+- [ ] 截图上传模块
+  - [ ] 图片上传组件
+  - [ ] 图片预览
+  - [ ] 批量上传
+- [ ] Web OCR 模块
+  - [ ] 集成 Tesseract.js
+  - [ ] 图像预处理 (Canvas)
+  - [ ] 装备数据解析
+- [ ] 本地存储模块
+  - [ ] IndexedDB 封装
+  - [ ] 数据模型定义
+  - [ ] CRUD 操作
 
-### Phase 3 - 分析功能 ✅
-- [x] 评分系统 (src/analyzer/)
-  - [x] 实现职业配置系统 (classifier.py)
-  - [x] 实现评分算法 (scorer.py)
-  - [x] 实现培养建议 (recommender.py)
-  - [ ] 添加评分可视化
+### Phase 3 - 分析功能 (复用逻辑) 🔄
+- [x] 评分系统 (已有 Python 版本，需转为 JS)
+- [x] 职业配置系统
+- [x] 培养建议生成
 
-### Phase 4 - 用户界面 🔄
-- [x] PyQt6 主窗口 (src/ui/)
-  - [x] 主界面布局
-  - [x] 装备列表组件
-  - [ ] 装备详情弹窗
-  - [ ] 筛选和排序功能
-- [ ] 设置界面
-  - [ ] 职业配置编辑
-  - [ ] OCR 参数调整
-  - [ ] 快捷键设置
+### Phase 4 - 用户界面 (Vue.js) 🔄
+- [ ] 主界面布局
+- [ ] 装备列表组件
+- [ ] 装备详情组件
+- [ ] 评分展示组件
+- [ ] 筛选和排序功能
 
-### Phase 5 - 集成与优化
-- [ ] 飞书集成 (src/database/feishu_sync.py)
-  - [ ] 配置飞书 API
-  - [ ] 实现数据同步
-  - [ ] 添加导出功能
-- [ ] 性能优化
-  - [ ] OCR 批处理
-  - [ ] 数据库查询优化
-  - [ ] 内存管理
-- [ ] 测试用例
-  - [ ] 单元测试
-  - [ ] 集成测试
-  - [ ] UI 测试
-
-### Phase 6 - 文档与发布
-- [ ] 完善使用指南
-- [ ] 编写 API 文档
-- [ ] 创建安装包
-- [ ] GitHub Release
+### Phase 5 - GitHub Pages 部署 🔄
+- [ ] 配置 GitHub Actions
+- [ ] 自动部署流程
+- [ ] 自定义域名 (可选)
+- [ ] 首版发布
 
 ---
 
 ## 🎯 当前进度
 
-**阶段：** Phase 1-3 已完成，Phase 4 进行中  
-**完成度：** 75%  
-**最后更新：** 2026-03-06 13:10
+**阶段：** Phase 4 - 前端重构进行中  
+**完成度：** 40%  
+**最后更新：** 2026-03-06 13:15  
+**方向调整：** 桌面应用 → 纯前端 Web 应用 (GitHub Pages)
 
 ---
 
 ## 📝 开发日志
+
+### 2026-03-06 13:15 - 项目方向调整
+- 🔄 从 Python 桌面应用改为纯前端 Web 应用
+- 🔄 技术栈：Vue.js 3 + Vite + Tesseract.js
+- 🔄 部署目标：GitHub Pages
+- ✅ 之前完成的 Python 代码保留作为参考
 
 ### 2026-03-06 13:10 - Claude Code 开发完成
 - ✅ Phase 1: 项目初始化完成
